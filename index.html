@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How Infinity Hides into Your Algorithms</title>
+  <style>
+    body { max-width:900px; margin:auto; padding:20px;
+           font-family:Segoe UI,Arial,sans-serif; color:#333; line-height:1.6; }
+    nav { position:sticky; top:0; background:#fff; padding:10px 0;
+          border-bottom:1px solid #ddd; margin-bottom:20px; }
+    nav a { margin:0 12px; text-decoration:none; color:#0077cc; font-weight:500; }
+    section { margin-bottom:50px; }
+    h1,h2,h3 { color:#222; }
+    h1 { font-size:2em; margin-bottom:0.2em; }
+    h2 { font-size:1.6em; border-bottom:2px solid #eee; padding-bottom:0.2em; }
+    .viz { text-align:center; margin:20px 0; }
+    iframe { width:100%; height:400px; border:1px solid #ccc; border-radius:4px; }
+    .callout { background:#f0f8ff; border-left:4px solid #66aaff;
+               padding:12px; margin:20px 0; font-style:italic; }
+  </style>
+
+  <!-- MathJax configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      chtml: { scale:1, minScale:1 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+  <h1>How Infinity Hides into Your Algorithms</h1>
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#baby">Baby PHP</a>
+    <a href="#infinite">Infinite Apps</a>
+    <a href="#cs">CS Uses</a>
+    <a href="#proofs">Proofs</a>
+    <a href="#art">The Art</a>
+    <a href="#closing">Closing</a>
+  </nav>
+
+  <section id="intro">
+    <h2>Introduction</h2>
+    <p><em>“You cannot put 10 socks in 9 drawers without something overlapping, obvious right? But this trivial fact lets you prove infinite truths, detect collisions in cryptography, and defeat compression algorithms.”</em></p>
+    <p>The Pigeonhole Principle (PHP)—“if you have more pigeons than holes, at least one hole must contain at least two pigeons”—feels like kindergarten. Yet it powers:</p>
+    <ul>
+      <li>✖️ Functions that <strong>fail to be injective</strong></li>
+      <li>🗜️ Data files that <strong>can’t be compressed</strong></li>
+      <li>🔐 Cryptosystems that <strong>inevitably collide</strong></li>
+      <li>♾️ Infinite sets with <strong>no least member</strong></li>
+    </ul>
+  </section>
+
+  <section id="baby">
+    <h2>1. The Baby Pigeonhole Principle</h2>
+    <h3>Formal Statement</h3>
+    <p><strong>PHP (finite):</strong> If <code>n</code> objects are placed into <code>m</code> containers and <code>n&gt;m</code>, some container holds ≥2 objects.</p>
+    <h3>Visual Example</h3>
+    <div class="viz"><iframe src="socks.html"></iframe></div>
+  </section>
+
+  <section id="infinite">
+    <h2>2. Going Deeper—Infinite Applications</h2>
+    <h3>Infinite PHP</h3>
+    <p>If infinitely many pigeons into finitely many holes ⇒ some hole infinite.</p>
+    <div class="viz"><iframe src="bins.html"></iframe></div>
+    <h3>Dirichlet’s Approximation</h3>
+    <div class="callout">
+      $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN},\quad 1\le q\le N$$
+    </div>
+  </section>
+
+  <section id="cs">
+    <h2>3. Pigeonholes in Computer Science</h2>
+    <h3>Hashing &amp; Collisions</h3>
+    <p>If $n$-bit inputs map to $m$-bit outputs with $n>m$, collisions are forced.</p>
+    <div class="viz"><iframe src="hash.html"></iframe></div>
+    <h3>Compression Paradox</h3>
+    <div class="callout">
+      $$2^0+2^1+\dots+2^{L-1}=2^L-1$$
+    </div>
+  </section>
+
+  <section id="proofs">
+    <h2>4. Surprising Proofs</h2>
+    <h3>Erdős–Szekeres</h3>
+    <p>Sequence length $mn+1$ ⇒ inc.\ subseq.\ $m+1$ or dec.\ $n+1$.</p>
+    <div class="viz"><iframe src="grid.html"></iframe></div>
+    <h3>Ramsey in $K_6$</h3>
+    <div class="viz"><iframe src="star.html"></iframe></div>
+  </section>
+
+  <section id="art">
+    <h2>5. The Art of Finding the Right Pigeonholes</h2>
+    <p>Map objects → categories creatively: intervals, residues, colors, chain lengths.</p>
+  </section>
+
+  <section id="closing">
+    <h2>Closing</h2>
+    <p>From socks to cryptography, PHP is your lens on infinity and inevitability.</p>
+    <blockquote>Call to action: Next time you see “more objects than categories,” pause—define your holes wisely.</blockquote>
+  </section>
+
+</body>
+</html>
