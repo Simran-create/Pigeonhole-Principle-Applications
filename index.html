@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>How Infinity Hides into Your Algorithms</title>
-  
-
   <style>
     body { max-width:900px; margin:auto; padding:20px;
            font-family:Segoe UI,Arial,sans-serif; color:#333; line-height:1.6; }
@@ -43,7 +41,7 @@
     <a href="#cs">CS Uses</a>
     <a href="#proofs">Surprising Proofs</a>
     <a href="#art">The Art</a>
-    <a href="#closing">Closing & References</a>
+    <a href="#closing">Closing</a>
   </nav>
 
   <section id="intro">
@@ -61,7 +59,7 @@
   <section id="baby">
     <h2>1. The Baby Pigeonhole Principle</h2>
     <h3>Formal Statement</h3>
-    <p><strong>PHP (finite version):</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
+    <p><strong>Pigeonhole Principle (finite version):</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
     <p>Alternatively, if each container has at most one object, you can place at most m objects total. Once you place a (m + 1)th, you force a container to have two.</p>
     <h3>Visual Example</h3>
     <div class="viz"><iframe src="socks.html"></iframe></div>
@@ -84,19 +82,57 @@
   <section id="infinite">
     <h2>2. Going Deeper—Infinite Applications</h2>
     <p> While the finite PHP is easy, there are <strong>“infinite”</strong> analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>.
-    <h3> Infinite Pigeonhole Principle</h3>
+    <h3>3.1 Infinite Pigeonhole Principle</h3>
     <p><strong>Infinite Pigeonhole Principle (Weak form)</strong>If infinitely many objects (pigeons) are distributed among finitely many categories (holes), then at least one category must contain infinitely many objects.</p>
     <p><strong>Why.</strong> Suppose you have infinitely many items x1, x2, x3,... and only m catagories. If each category held only finitely many, say at most Ni in catagory i, then the total objects would be at most N1 + N2 + ... +Nm < ∞. That contradicts “infinitely many.” Hence some category is infinite.</p>
-    <p><strong>Diagram 1:</strong></p>
+    <p><strong>Diagram 1:</strong> Imagine we assign each natural number n ∈ N to one of 3 bins labeled A, B, C. If infinitely many numbers exist, one bin must collect infinitely many:</p>
+    <p><strong>Bins:</strong>  [ A ],    [ B ],    [ C]</p>
+    <p><strong>Numbers:</strong> 1→B 2→A 3→C 4→B 5→C 6→B 7→A 8→C 9→B ...</p>
+    <p>Since there are infinitely many natural numbers, at least one bin, say B, receives infinitely many.</p>
     <div class="viz"><iframe src="bins.html"></iframe></div>
-    <h3>Dirichlet’s Approximation</h3>
+    <h3>3.2 Dirichlet’s Approximation</h3>
+    <p><strong>Dirichlet’s Theorem.</strong></p>
+    <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N</p>
     <div class="callout">
       $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN},\quad 1\le q\le N$$
     </div>
+    <p>Sketch using pigeonholes.</p>
+    <p>1. Consider the N + 1 real numbers $$
+ \left|\, \alpha - \frac{p}{q} \right| \;\; < \;\; \frac{1}{q\,N}
+ $$ where {x} denotes the fractional part of { x }. Each { kα } lies in [0, 1).</p>
+    <p>2. Partition the interval [0, 1) into N smaller half-open subintervals (“holes”): $$
+[0,\tfrac{1}{N}), \;\; [\tfrac{1}{N},\tfrac{2}{N}), \;\dots,\; [\tfrac{N-1}{N},1).   $$</p>
+    <p>By the (finite) PHP, two of the N + 1 fractional parts, say iα and jα with i < j ≤ N, must land in the same interval of length 1/N. Therefore,  $$
+    \bigl| \{\,j\alpha\} - \{\,i\alpha\} \bigr| < \frac{1}{N}.  $$ </p>
+    <p>But { jα} − { iα} equals {(j −i)α} (up to possibly ±1), so there is an integer q = j −i(1 ≤ q ≤ N) and integer p = ⌊jα⌋ − ⌊iα⌋ such that $$
+    \left|\, q\,\alpha - p \right| < \frac{1}{N}
+    \quad\Longrightarrow\quad
+    \left|\, \alpha - \frac{p}{q} \right| < \frac{1}{q\,N}.
+    $$ 
+    Thus infinite conclusions—approximation of irrationals—follow from partitioning a finite interval. </p>
+    <h3>3.3 Irrationality of √2</h3>
+    <p>A classic proof of √2 being irrational is not pigeonhole-style, but one can recast it via Dirichlet’s theorem:
+    <ol><li>If √2 = p/q exactly, then |√2 − p/q| = 0.</li>
+        <li>But Dirichlet’s theorem guarantees infinitely many rational approximations p/q with $$
+   \left| \sqrt{2} - \frac{p}{q} \right| < \frac{1}{q\,N}. $$  For large N, 1/qN < 0 is impossible, so no exact equality can hold.</li></ol></p>
+    <p>This view shows that no rational can equal √2, since rationals do not achieve these “too-good” approximations infinitely often.</p>
+    <h3>3.4 Uncountability of the Real Numbers</h3>
+      <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
+        <li>Suppose for contradiction R is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
+        <li> For each n, consider the decimal expansion of rn truncated at n digits. That is, let sn = first n digits of rn n [0, 1]. 
+Each sn lies in one of the 10n intervals of the for $$\bigl[\,0.d_1 d_2 \dots d_n,\;0.d_1 d_2 \dots d_n + 10^{-n}\bigr).$$ </li>
+        <li> For each n, assign rn to the “interval” corresponding to its truncated form sn. As n → ∞, we would be distributing infinitely many reals into 
+             a <strong>strictly finite</strong> number of decimal-truncation intervals at each stage—forcing some interval to contain infinitely many “tails.”</li>
+        <li> By a diagonal-type selection, you can then construct a real number not in your original list, contradicting countability. This is somewhat more involved than the standard diagonal, 
+but it highlights how <strong>infinitely many pigeons (reals) into finitely many “decimal-prefix slots”</strong> forces a new real outside the enumeration</li>
+
+      </ol></p>
+      
   </section>
 
   <section id="cs">
-    <h2>3. Pigeonholes in Computer Science</h2>
+    <h2>3. Pigeonholes in Algorithms and Computer Scienc</h2>
+    <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications</p>
     <h3>Hashing &amp; Collisions</h3>
     <p>If $n$-bit inputs map to $m$-bit outputs with $n>m$, collisions are forced.</p>
     <div class="viz"><iframe src="hash.html"></iframe></div>
@@ -150,7 +186,7 @@
     <p><strong>Call to Action. </strong>Next time you see “more objects than categories,” pause. Can you define the categories (pigeonholes) so that PHP gives you exactly the statement you need? Look around—every limitation hides a powerful truth waiting to be unearthed.</p>
     <h3>7.1 Further Exploration</h3>
     <p>If you want to dive deeper, consider these <strong>self-contained</strong> exercises:</p>
-    <p><strong>1. Dirichlet’s Bound on π.</strong> Show that there are infinitely many rational approximations p/q to π satisfying $$\left|\pi - \tfrac{p}{q}\right| < \tfrac{1}{q^2}$$, using a pigeonhole partition of {kπ} into intervals of length 1/N.</p>
+    <p><strong>1. Dirichlet’s Bound on π.</strong> Show that there are infinitely many rational approximations p/q to π satisfying $$\left|\pi - \tfrac{p}{q}\right| < \tfrac{1}{q^2},$$ using a pigeonhole partition of {kπ} into intervals of length 1/N.</p>
     <p><strong>2. Ramsey Number R(4, 4).</strong> By extending the “star-center” pigeonhole idea, prove that any 2-coloring of <code>K_18</code> contains a monochromatic K4. 
       (Hint: Partition edges incident to a vertex into two colors; then apply the R(3, 3) = 6 result on neighbors.)</p>
 
