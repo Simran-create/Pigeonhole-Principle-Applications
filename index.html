@@ -66,12 +66,10 @@
     <h3>Visual Example</h3>
     <div class="viz"><iframe src="socks.html"></iframe></div>
     <h3>Birthday Paradox (Basic counting)</h3>
-    <p><strong>Setup:</strong> Consider 23 people in a room. There are 365 possible birthdays.
-    
-    <strong>Application of PHP:</strong> Since 23 < 365, the basic PHP does not force a collision. But if we has 366 people, two must share a birthday.
-
-    <strong>Remark.</strong> The ”birthday paradox” probability calculation shows that collisions happen much earlier than 366; but PHP gives a guarantee only when participants > 366.
-    </p>
+    <p><strong>Setup:</strong> Consider 23 people in a room. There are 365 possible birthdays.</p>
+    <p><strong>Application of PHP:</strong> Since 23 < 365, the basic PHP does not force a collision. But if we has 366 people, two must share a birthday.</p>
+    <p><strong>Remark.</strong> The ”birthday paradox” probability calculation shows that collisions happen much earlier than 366; but PHP gives a guarantee only when participants > 366.
+     </p>
     <h3>Matching problems</h3>
     <p>If you have 5 red balls and 5 blue balls in 9 boxes, whatever arrangement, at least one box has at least 2 balls.</p>
     <p>More generally, distributing n items into k catagories forces at least $$
@@ -85,9 +83,11 @@
 
   <section id="infinite">
     <h2>2. Going Deeper—Infinite Applications</h2>
-    <p> While the finite PHP is easy, there are “infinite” analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>.
+    <p> While the finite PHP is easy, there are <strong>“infinite”</strong> analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>.
     <h3> Infinite Pigeonhole Principle</h3>
-    <p>If infinitely many pigeons into finitely many holes ⇒ some hole infinite.</p>
+    <p><strong>Infinite Pigeonhole Principle (Weak form)</strong>If infinitely many objects (pigeons) are distributed among finitely many categories (holes), then at least one category must contain infinitely many objects.</p>
+    <p><strong>Why.</strong> Suppose you have infinitely many items x1, x2, x3,... and only m catagories. If each category held only finitely many, say at most Ni in catagory i, then the total objects would be at most N1 + N2 + ... +Nm < ∞. That contradicts “infinitely many.” Hence some category is infinite.</p>
+    <p><strong>Diagram 1:</strong></p>
     <div class="viz"><iframe src="bins.html"></iframe></div>
     <h3>Dirichlet’s Approximation</h3>
     <div class="callout">
