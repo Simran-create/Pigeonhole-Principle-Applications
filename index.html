@@ -129,8 +129,8 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
   <section id="cs">
     <h2>3. Pigeonholes in Algorithms and Computer Science</h2>
     <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications</p>
-    <h3>4.1 Hashing and Collisions</h3>
-    <p>$$ <strong>\text{Setup:}</strong> \text{A hash function h} : {0, 1}^n → {0, 1}^m \text{maps n-bit inputs to m-bit outputs, where m < n}</p>
+    <h3>3.1 Hashing and Collisions</h3>
+    <p>$$ <strong>\text{Setup:}</strong> \text{A hash function h} : {0, 1}^n → {0, 1}^m \text{maps n-bit inputs to m-bit outputs, where m < n}$$</p>
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
           If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
@@ -138,7 +138,7 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <p>Hash Buckets (2^m holes): [ 0 ] [ 1 ] ... [ 2m − 1 ]</p>
     <p>Since 2^n ≫ 2^m, many inputs are forced to map into the same bucket</p>
     <div class="viz"><iframe src="hash.html"></iframe></div>
-    <h3>4.2 Compression Paradox</h3>
+    <h3>3.2 Compression Paradox</h3>
     <p><strong>Claim.</strong> No lossless compression algorithm can compress every file to a shorter representation</p>
     <p><strong>Intuition.</strong> Suppose you have an algorithm C that maps any bit-string of length L into a shorter string of length < L.</p>
     <p><strong>Counting argument.</strong> There are 2L distinct input strings of length L. But the algorithm can only output strings of length at most L − 1, so there are at most $$
@@ -146,16 +146,47 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <p><strong>Conclusion (pigeonhole).</strong> By PHP, at least two distinct inputs of length L must map to the same output. The compression fails to be lossless.</p>
     <p><strong>Corollary.</strong> Any “universal” compressor must expand some files—no magic algorithm compresses every file. In practice, compressors like ZIP exploit patterns in real-world data; but in the worst case
 (e.g., random data), they cannot shrink everything.</p>
-    <h3>Birthday Attacks in Cryptography</h3>
+    <h3>3.3 Birthday Attacks in Cryptography</h3>
     <p>Let H be a hash function producing m-bit outputs. If an adversary picks random inputs and computes hashes, then:</p>
     <p>$$ \text{Birthday Paradox. After about}  2^m/2 \text{random inputs, the probability of finding a collision in hashvalues becomes significant (50%).}$$</p>
+    <p>$$ \text{Pigeonhole argument (simplified). There are} 2^m \text{hash-values (“holes”). Sampling N random inputs (“pigeons”), the expected number of collisions arises when} N ≈√2^m. \text{Though not strictly PHP, the intuition stems from “if you place about} √2m \text{pigeons into} 2^m \text{holes, collisions become likely.”} $$</p>
+    <p><strong>Implication.</strong> To resist birthday attacks, choose m large (e.g., m = 256 for SHA-256). Then 2^128 effort is required to find a collision by brute force, which is currently computationally infeasible.</p>
+    <h3>3.4 Load Balancing and Cache Design</h3>
+    <p>Suppose you have k servers (or cache slots) and want to assign n tasks (or memory blocks) dynamically:</p>
+    <p>If n > k and tasks are all “hot,” by simple pigeonhole, at least one server must handle at least ⌈n/k⌉ tasks simultaneously—creating a bottleneck.</p>
+    <p><strong>Cache lines.</strong> Consider a CPU cache with B cache lines and N distinct memory blocks. If a program accesses N blocks where N > B 
+ while reusing them in some pattern, eventually some cache line must evict another (due to PHP). This underlies cache-miss lower bounds in algorithms.</p>
+    <p><strong>Balanced hashing (Cuckoo, Consistent Hashing).</strong>strong> These techniques try to distribute “pigeons” (requests) evenly among “holes” (servers), but ultimately if you have more requests than servers, some server must bear extra load.</p> 
   </section>
 
   <section id="proofs">
     <h2>4. Surprising Proofs</h2>
-    <h3>Erdős–Szekeres</h3>
-    <p>Sequence length $mn+1$ ⇒ inc.\ subseq.\ $m+1$ or dec.\ $n+1$.</p>
-    <div class="viz"><iframe src="grid.html"></iframe></div>
+    Beyond hashing and algorithms, pigeonhole ideas often hide inside elegant combinatorial proofs.
+    <h3>4.1 Erd&#337;s–Szekeres: Monotonic Subsequence</h3>
+    
+    <p><strong>Theorem (Erd&#337;s–Szekeres).</strong></p>
+    <p>Any sequence of mn + 1 distinct real numbers contains either an increasing subsequence of length m + 1 or a decreasing subsequence of length n + 1.</p>
+    <p><strong>Proof Sketch (pigeonhole coloration).</strong> 1. Let the sequence be a1, a2, . . . , a_mn+1.</p>
+    <p>2. For each position i, define two numbers: <br>
+      L(i) = length of longest increasing subsequence starting at a_i. <br> D(i) = length of longest decreasing subsequence starting at a_i.</p>
+    <p>3. We know 1 ≤ L(i) ≤ m + 1 and 1 ≤ D(i) ≤ n + 1. Consider the set of ordered pairs {(L(i), D(i)) : 1 ≤ i ≤ mn + 1}.</p>
+    <p>4.  There are only m × n possible pairs (u, v) with 1 ≤ u ≤ m and 1 ≤ v ≤ n. Actually, if either L(i) = m+1 or D(i) = n+1 for some i, 
+we are done (we found our long monotonic subsequence). Otherwise, each i corresponds to a pair in {1, . . . , m} × {1, . . . , n}.</p>
+    <p>Since we have mn + 1 indices but only mn possible (L, D) values with both coordinates (m, n), by PHP at least two indices i < j must share the same L(i), D(i) = L(j), D(j). </p>
+    <p>. One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
+    <p><strong>Visual: Grid of (L, D) Values</strong></p>
+    <p> D &nbsp; &nbsp; &nbsp; &uarr; <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |  &nbsp;  &nbsp; the possible pairs (u,v) <br>
+        n+1 | <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | <br>
+        n &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, n) (2, n) (3, n)...(m, n)  <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1,n-1) (2,n-1) (3,n-1)...  <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | <br>
+        2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, 2) (2, 2) (3, 2)...(m,2) <br>
+        1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, 1) (2, 1) (3, 1)...(m, 1) <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-----------------------------------------------
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... m+1
+    </p>
     <h3>Ramsey in $K_6$</h3>
     <div class="viz"><iframe src="star.html"></iframe></div>
   </section>
