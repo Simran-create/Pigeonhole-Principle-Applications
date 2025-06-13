@@ -176,20 +176,26 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     <p>One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
     <p><strong>Visual: Grid of (L, D) Values</strong></p>
     <p> D &nbsp; &nbsp; &uarr; <br>
-        . &nbsp; &nbsp; &nbsp; |  &nbsp;  &nbsp; the possible pairs (u,v) <br>
+        .. &nbsp; &nbsp; &nbsp; |  &nbsp;  &nbsp; the possible pairs (u,v) <br>
         n+1 | <br>
-        . &nbsp; &nbsp; &nbsp; | <br>
+        .. &nbsp; &nbsp; &nbsp; | <br>
         n &nbsp; &nbsp; | (1, n) (2, n) (3, n)...(m, n)  <br>
-        . &nbsp; &nbsp; &nbsp; | (1,n-1) (2,n-1) (3,n-1)...  <br>
-        . &nbsp; &nbsp; &nbsp; | <br>
+        .. &nbsp; &nbsp; &nbsp; | (1,n-1) (2,n-1) (3,n-1)...  <br>
+        .. &nbsp; &nbsp; &nbsp; | <br>
         2 &nbsp; &nbsp; | (1, 2) (2, 2) (3, 2)...(m,2) <br>
         1 &nbsp; &nbsp; | (1, 1) (2, 1) (3, 1)...(m, 1) <br>
-        . &nbsp; &nbsp; &nbsp; |-----------------------------------------------
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... m+1
+        .. &nbsp; &nbsp; &nbsp; |-----------------------------------------------
+        .. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... m+1
     </p>
     <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existe</p>
     <h3><strong>$$ \text{5.2 Ramsey Theory: Triangles in} K_6 $$</strong></h3>
-    <div class="viz"><iframe src="star.html"></iframe></div>
+    <p>Fact. Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</p>
+    <p><strong>Pigeonhole proof sketch</strong></p>
+    <p><strong>1.</strong> Label vertices V = {v1, v2, v3, v4, v5, v6}. Consider vertex v1. It has 5 incident edges, each colored red (R) or blue (B).</p>
+    <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1v2, v1v3, v1v4} are all re</p>
+    <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2v3, v3v4, v2v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
+    <p><strong>4.</strong> In either case, we find a monochromatic triangle.</p>
+      <div class="viz"><iframe src="star.html"></iframe></div>
   </section>
 
   <section id="art">
