@@ -196,6 +196,10 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2v3, v3v4, v2v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
     <p><strong>4.</strong> In either case, we find a monochromatic triangle.</p>
       <div class="viz"><iframe src="star.html"></iframe></div>
+    <p>From v1, three red edges go to v2, v3, v4. Among {v2, v3, v4}, either a red edge exists (closing a red triangle) or all are blue (forming a blue triangle).</p>
+    <h3>5.3 Monochromatic Subsets (Ramsey-Flavored)</h3>
+    <p>More generally, if you color the edges of a sufficiently large complete graph K_n in c colors, pigeonhole arguments often help find monochromatic cliques of a given size. 
+                       While standard proofs use induction, the base cases rely on simple pigeonhole partitions of edges.</p>
   </section>
 
   <section id="art">
