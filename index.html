@@ -173,19 +173,19 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <p>4.  There are only m × n possible pairs (u, v) with 1 ≤ u ≤ m and 1 ≤ v ≤ n. Actually, if either L(i) = m+1 or D(i) = n+1 for some i, 
 we are done (we found our long monotonic subsequence). Otherwise, each i corresponds to a pair in {1, . . . , m} × {1, . . . , n}.</p>
     <p>Since we have mn + 1 indices but only mn possible (L, D) values with both coordinates (m, n), by PHP at least two indices i < j must share the same L(i), D(i) = L(j), D(j). </p>
-    <p>. One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
+    <p>One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
     <p><strong>Visual: Grid of (L, D) Values</strong></p>
-    <p> D &nbsp; &nbsp; &nbsp; &uarr; <br>
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |  &nbsp;  &nbsp; the possible pairs (u,v) <br>
+    <p> D &nbsp; &nbsp; &uarr; <br>
+        . &nbsp; &nbsp; &nbsp; |  &nbsp;  &nbsp; the possible pairs (u,v) <br>
         n+1 | <br>
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | <br>
-        n &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, n) (2, n) (3, n)...(m, n)  <br>
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1,n-1) (2,n-1) (3,n-1)...  <br>
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | <br>
-        2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, 2) (2, 2) (3, 2)...(m,2) <br>
-        1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | (1, 1) (2, 1) (3, 1)...(m, 1) <br>
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-----------------------------------------------
-        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... m+1
+        . &nbsp; &nbsp; &nbsp; &nbsp; | <br>
+        n &nbsp; &nbsp; &nbsp; &nbsp; | (1, n) (2, n) (3, n)...(m, n)  <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; | (1,n-1) (2,n-1) (3,n-1)...  <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; | <br>
+        2 &nbsp; &nbsp; &nbsp; &nbsp; | (1, 2) (2, 2) (3, 2)...(m,2) <br>
+        1 &nbsp; &nbsp; &nbsp; &nbsp; | (1, 1) (2, 1) (3, 1)...(m, 1) <br>
+        . &nbsp; &nbsp; &nbsp; &nbsp; |-----------------------------------------------
+        . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... m+1
     </p>
     <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existe</p>
     <h3><strong>$$ \text{5.2 Ramsey Theory: Triangles in} K_6 $$</strong></h3>
