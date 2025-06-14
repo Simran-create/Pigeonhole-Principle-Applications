@@ -151,7 +151,7 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <h2>3. Pigeonholes in Algorithms and Computer Science</h2>
     <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications</p>
     <h3>3.1 Hashing and Collisions</h3>
-    <p>$$ \text{Setup:}  \text{A hash function h} : \hspace{2mm} {0, 1}^n → {0, 1}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n} $$ </p>
+    <p>$$ \text{Setup:} \hspace{2mm} \text{A hash function h} : \hspace{2mm} \{0, 1\}^n → \{0, 1\}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n} $$ </p>
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
           If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
