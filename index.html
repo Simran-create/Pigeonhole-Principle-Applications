@@ -169,7 +169,8 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
 (e.g., random data), they cannot shrink everything.</p>
     <h3>3.3 Birthday Attacks in Cryptography</h3>
     <p>Let H be a hash function producing m-bit outputs. If an adversary picks random inputs and computes hashes, then:</p>
-    <p>$$ \text{Birthday Paradox. After about} \hspace{1mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues becomes significant (50%).}$$</p>
+    <p><strong>Birthday Paradox.</strong></p>
+    <p>$$ \text{After about} \hspace{1mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues become significant (50%).}$$</p>
     <p>$$ \text{Pigeonhole argument (simplified). There are} \hspace{1mm} 2^m \hspace{1mm} \text{hash-values (“holes”). Sampling N random inputs (“pigeons”),} $$ </p>
     <p>$$ \text{the expected number of collisions arises when} \hspace{1mm} N ≈ \sqrt{2^m}. \hspace{1mm} \text{Though not strictly PHP, the intuition stems from “if} $$ </p>
     <p>$$ \text{you place about the} \hspace{1mm} \sqrt{2^m} \hspace{1mm} \text{pigeons into} \hspace{1mm} 2^m \hspace{1mm} \text{holes, collisions become likely.”} $$</p>
