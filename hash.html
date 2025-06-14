@@ -1,66 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hash Visualization</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+  <title>Hashing & Collisions</title>
   <style>
     body {
-      font-family: sans-serif;
       text-align: center;
-      margin: 0;
-      padding: 1rem;
+      padding: 30px;
+      font-family: Arial, sans-serif;
     }
-    .container {
+
+    h3 {
+      margin-bottom: 40px; /* Adds space between title and buckets */
+    }
+
+    .buckets {
       display: flex;
       justify-content: center;
-      align-items: flex-end;
-      gap: 40px;
-      margin-top: 2rem;
+      margin: 20px 0;
     }
-    .bin {
-      width: 80px;
-      height: 180px;
-      background-color: #f2f6fa;
+
+    .bucket {
+      width: 100px;
+      height: 120px;
       border: 2px solid #444;
-      border-radius: 8px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      font-size: 24px;
-      padding-bottom: 10px;
+      margin: 0 12px;
+      border-radius: 6px;
+      background: #fafafa;
       position: relative;
     }
-    .bin-label {
-      position: absolute;
-      top: -30px;
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
+
+    .bucket.collide {
+      border-color: #e74c3c;
+      animation: shake 0.3s;
     }
-    h2 {
-      margin-bottom: 3rem;
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25%, 75% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+    }
+
+    .bucket h4 {
+      position: absolute;
+      top: -34px;           /* Move label higher */
+      width: 100%;
+      margin: 0;
+      font-size: 1em;
+    }
+
+    .count {
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      font-size: 1.8em;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin: 8px;
+      background: #8e44ad;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h2>Infinite PHP Illustration</h2>
 
-  <div class="container">
-    <div class="bin">
-      <div class="bin-label">Bin A</div>
-      5
-    </div>
-    <div class="bin" style="border-color: red;">
-      <div class="bin-label">Bin B</div>
-      8
-    </div>
-    <div class="bin">
-      <div class="bin-label">Bin C</div>
-      6
-    </div>
+  <h3>Hashing: Inputs → Buckets</h3>
+
+  <div class="buckets">
+    <div class="bucket" id="b0"><h4>00</h4><div class="count">0</div></div>
+    <div class="bucket" id="b1"><h4>01</h4><div class="count">0</div></div>
+    <div class="bucket" id="b2"><h4>10</h4><div class="count">0</div></div>
+    <div class="bucket" id="b3"><h4>11</h4><div class="count">0</div></div>
   </div>
+
+  <button onclick="add()">Hash Random</button>
+  <button onclick="reset()">Reset</button>
+
+  <script>
+    let cnt = [0, 0, 0, 0];
+
+    function add() {
+      let num = Math.floor(Math.random() * 16).toString(2).padStart(4, '0');
+      let i = parseInt(num.slice(-2), 2);
+      cnt[i]++;
+      let el = document.getElementById('b' + i);
+      el.querySelector('.count').textContent = cnt[i];
+      if (cnt[i] >= 2) {
+        el.classList.add('collide');
+        setTimeout(() => el.classList.remove('collide'), 300);
+      }
+    }
+
+    function reset() {
+      cnt = [0, 0, 0, 0];
+      for (let i = 0; i < 4; i++) {
+        let el = document.getElementById('b' + i);
+        el.querySelector('.count').textContent = '0';
+        el.classList.remove('collide');
+      }
+    }
+  </script>
+
 </body>
 </html>
