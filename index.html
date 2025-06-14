@@ -82,7 +82,7 @@
   <section id="infinite">
     <h2>2. Going Deeper—Infinite Applications</h2>
     <p> While the finite PHP is easy, there are <strong>“infinite”</strong> analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>.
-    <h3>3.1 Infinite Pigeonhole Principle</h3>
+    <h3>2.1 Infinite Pigeonhole Principle</h3>
     <p><strong>Infinite Pigeonhole Principle (Weak form)</strong> If infinitely many objects (pigeons) are distributed among finitely many categories (holes), then at least one category must contain infinitely many objects.</p>
     <p><strong>Why.</strong> Suppose you have infinitely many items x1, x2, x3,... and only m catagories. If each category held only finitely many, say at most Ni in catagory i, then the total objects would be at most N1 + N2 + ... +Nm < ∞. That contradicts “infinitely many.” Hence some category is infinite.</p>
     <p><strong>Diagram 1:</strong> Imagine we assign each natural number n ∈ N to one of 3 bins labeled A, B, C. If infinitely many numbers exist, one bin must collect infinitely many:</p>
@@ -90,7 +90,7 @@
     <p><strong>Numbers:</strong> 1→B 2→A 3→C 4→B 5→C 6→B 7→A 8→C 9→B ...</p>
     <p>Since there are infinitely many natural numbers, at least one bin, say B, receives infinitely many.</p>
     <div class="viz"><iframe src="bins.html"></iframe></div>
-    <h3>3.2 Dirichlet’s Approximation</h3>
+    <h3>2.2 Dirichlet’s Approximation</h3>
     <p><strong>Dirichlet’s Theorem.</strong></p>
     <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N</p>
     <div class="callout">
@@ -108,13 +108,13 @@
     \left|\, \alpha - \frac{p}{q} \right| < \frac{1}{q\,N}.
     $$ 
     Thus infinite conclusions—approximation of irrationals—follow from partitioning a finite interval. </p>
-    <h3>3.3 Irrationality of √2</h3>
+    <h3>2.3 Irrationality of √2</h3>
     <p>A classic proof of √2 being irrational is not pigeonhole-style, but one can recast it via Dirichlet’s theorem:
     <ol><li>If √2 = p/q exactly, then |√2 − p/q| = 0.</li>
         <li>But Dirichlet’s theorem guarantees infinitely many rational approximations p/q with $$
    \left| \sqrt{2} - \frac{p}{q} \right| < \frac{1}{q\,N}. $$  For large N, 1/qN < 0 is impossible, so no exact equality can hold.</li></ol></p>
     <p>This view shows that no rational can equal √2, since rationals do not achieve these “too-good” approximations infinitely often.</p>
-    <h3>3.4 Uncountability of the Real Numbers</h3>
+    <h3>2.4 Uncountability of the Real Numbers</h3>
       <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
         <li>Suppose for contradiction R is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
         <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} r_n n [0, 1]. $$
@@ -148,8 +148,8 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
 (e.g., random data), they cannot shrink everything.</p>
     <h3>3.3 Birthday Attacks in Cryptography</h3>
     <p>Let H be a hash function producing m-bit outputs. If an adversary picks random inputs and computes hashes, then:</p>
-    <p>$$ \text{Birthday Paradox. After about}  2^m/2 \text{random inputs, the probability of finding a collision in hashvalues becomes significant (50%).}$$</p>
-    <p>$$ \text{Pigeonhole argument (simplified). There are} 2^m \text{hash-values (“holes”). Sampling N random inputs (“pigeons”), the expected number of collisions arises when} N ≈√2^m. \text{Though not strictly PHP, the intuition stems from “if you place about} √2m \text{pigeons into} 2^m \text{holes, collisions become likely.”} $$</p>
+    <p>$$ \text{Birthday Paradox. After about} &nbsp; 2^m/2 &nbsp; \text{random inputs, the probability of finding a collision in hashvalues becomes significant (50%).}$$</p>
+    <p>$$ \text{Pigeonhole argument (simplified). There are} &nbsp; 2^m &nbsp; \text{hash-values (“holes”). Sampling N random inputs (“pigeons”), the expected number of collisions arises when} &nbsp; N ≈√2^m. &nbsp; \text{Though not strictly PHP, the intuition stems from “if you place about} &nbsp; √2m &nbsp; \text{pigeons into} &nbsp; 2^m \text{holes, collisions become likely.”} $$</p>
     <p><strong>Implication.</strong> To resist birthday attacks, choose m large (e.g., m = 256 for SHA-256). Then 2^128 effort is required to find a collision by brute force, which is currently computationally infeasible.</p>
     <h3>3.4 Load Balancing and Cache Design</h3>
     <p>Suppose you have k servers (or cache slots) and want to assign n tasks (or memory blocks) dynamically:</p>
