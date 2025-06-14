@@ -59,21 +59,21 @@
   <section id="baby">
     <h2>1. The Baby Pigeonhole Principle</h2>
     <h3>Formal Statement</h3>
-    <p><strong>Pigeonhole Principle (finite version):</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
+    <p><strong>1.1 Pigeonhole Principle (finite version):</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
     <p>Alternatively, if each container has at most one object, you can place at most m objects total. Once you place a (m+1)th, you force a container to have two.</p>
     <h3>Visual Demonstration</h3>
     <div class="viz"><iframe src="socks.html"></iframe></div>
-    <h3>Birthday Paradox (Basic counting)</h3>
+    <h3>1.2 Birthday Paradox (Basic counting)</h3>
     <p><strong>Setup:</strong> Consider 23 people in a room. There are 365 possible birthdays.</p>
     <p><strong>Application of PHP:</strong> Since 23 < 365, the basic PHP does not force a collision. But if we has 366 people, two must share a birthday.</p>
     <p><strong>Remark.</strong> The ”birthday paradox” probability calculation shows that collisions happen much earlier than 366; but PHP gives a guarantee only when participants > 366.
      </p>
-    <h3>Matching problems</h3>
+    <h3>1.3 Matching problems</h3>
     <p>If you have 5 red balls and 5 blue balls in 9 boxes, whatever arrangement, at least one box has at least 2 balls.</p>
     <p>More generally, distributing n items into k catagories forces at least $$
       \left\lceil \frac{n}{k} \right\rceil
       $$ items in one catagory.</p>
-    <h3>Why this simple idea matters</h3>
+    <h3>1.4 Why this simple idea matters</h3>
     <li><strong>Universality.</strong> Any time you try to squeeze more objects into fewer “slots,” you get overlap.</li>
     <li><strong>Certainty.</strong> Unlike probabilistic arguments, PHP yields a strict, deterministic guarantee.</li>
     <li><strong>Foundation.</strong> Many elementary proofs (e.g., in combinatorics, graph theory, and number theory) rest on pigeonholes.</li>
@@ -86,23 +86,21 @@
     <p><strong>Infinite Pigeonhole Principle (Weak form)</strong> If infinitely many objects (pigeons) are distributed among finitely many categories (holes), then at least one category must contain infinitely many objects.</p>
     <p><strong>Why.</strong> Suppose you have infinitely many items x1, x2, x3,... and only m catagories. If each category held only finitely many, say at most Ni in catagory i, then the total objects would be at most N1 + N2 + ... +Nm < ∞. That contradicts “infinitely many.” Hence some category is infinite.</p>
     <p><strong>Diagram 1:</strong> Imagine we assign each natural number n ∈ N to one of 3 bins labeled A, B, C. If infinitely many numbers exist, one bin must collect infinitely many:</p>
-    <p><strong>Bins:</strong>  [ A ],    [ B ],    [ C]</p>
-    <p><strong>Numbers:</strong> 1→B 2→A 3→C 4→B 5→C 6→B 7→A 8→C 9→B ...</p>
+    <p><strong>Bins:</strong>  [ A ],   &nbsp; &nbsp; [ B ], &nbsp; &nbsp;   [ C]</p>
+    <p><strong>Numbers:</strong> 1→B &nbsp; &nbsp; 2→A &nbsp; &nbsp; 3→C &nbsp; &nbsp; 4→B &nbsp; &nbsp; 5→C &nbsp; &nbsp; 6→B &nbsp; &nbsp; 7→A &nbsp; &nbsp; 8→C &nbsp; &nbsp;9→B ...</p>
     <p>Since there are infinitely many natural numbers, at least one bin, say B, receives infinitely many.</p>
     <div class="viz"><iframe src="bins.html"></iframe></div>
-    <h3>2.2 Dirichlet’s Approximation</h3>
+    <h3>2.2 Dirichlet’s Approximation Theorem</h3>
     <p><strong>Dirichlet’s Theorem.</strong></p>
-    <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N</p>
-    <div class="callout">
-      $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN},\quad 1\le q\le N$$
-    </div>
+    <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N    $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN},\quad 1\le q\le N$$ </p>
+   
     <p><strong>Sketch using pigeonholes.</strong></p>
     <p>1. Consider the N + 1 real numbers{ α }, { 2α }, { 3α }, . . . , { Nα },where {x} denotes the fractional part of {n}. Each { kα } lies in [0, 1).</p>
     <p>2. Partition the interval [0, 1) into N smaller half-open subintervals (“holes”): $$
 [0,\tfrac{1}{N}), \;\; [\tfrac{1}{N},\tfrac{2}{N}), \;\dots,\; [\tfrac{N-1}{N},1).   $$</p>
     <p>3. By the (finite) PHP, two of the N + 1 fractional parts, say iα and jα with i < j ≤ N, must land in the same interval of length 1/N. Therefore,  $$
     \bigl| \{\,j\alpha\} - \{\,i\alpha\} \bigr| < \frac{1}{N}.  $$ </p>
-    <p>4. But { jα} − { iα} equals {(j −i)α} (up to possibly ±1), so there is an integer q = j −i(1 ≤ q ≤ N) and integer p = ⌊jα⌋ − ⌊iα⌋ such that $$
+    <p>4. But { jα } − { iα } equals {( j −i )α} (up to possibly ±1), so there is an integer q = j −i (1 ≤ q ≤ N) and integer p = ⌊ jα ⌋ − ⌊ iα ⌋ such that $$
     \left|\, q\,\alpha - p \right| < \frac{1}{N}
     \quad\Longrightarrow\quad
     \left|\, \alpha - \frac{p}{q} \right| < \frac{1}{q\,N}.
@@ -117,7 +115,7 @@
     <h3>2.4 Uncountability of the Real Numbers</h3>
       <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
         <li>Suppose for contradiction R is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
-        <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} r_n n [0, 1]. $$
+        <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} \hspace{2mm} r_n n [0, 1]. $$
 Each s_n lies in one of the 10^n intervals of the for $$\bigl[\,0.d_1 d_2 \dots d_n,\;0.d_1 d_2 \dots d_n + 10^{-n}\bigr).$$ </li>
         <li> For each n, assign r_n to the “interval” corresponding to its truncated form s_n. As n → ∞, we would be distributing infinitely many reals into 
              a <strong>strictly finite</strong> number of decimal-truncation intervals at each stage—forcing some interval to contain infinitely many “tails.”</li>
@@ -130,19 +128,19 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <h2>3. Pigeonholes in Algorithms and Computer Science</h2>
     <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications</p>
     <h3>3.1 Hashing and Collisions</h3>
-    <p>$$ <strong>\text{Setup:}</strong> \text{A hash function h} : {0, 1}^n → {0, 1}^m \text{maps n-bit inputs to m-bit outputs, where m < n}$$</p>
+    <p>$$ \text{Setup:}  \text{A hash function h} : \hspace{2mm} {0, 1}^n → {0, 1}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n} $$ </p>
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
           If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
-    <p>Diagram: Inputs vs Hash Buckets $$ \text{Inputs (2n pigeons):} x_1, x_2, x_3, ...,x_2n $$</p>
+    <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (2n pigeons):} \hspace{2mm}  x_1, x_2, x_3, ...,x_2n $$</p>
     <p>Hash Buckets (2^m holes): [ 0 ] [ 1 ] ... [ 2m − 1 ]</p>
     <p>Since 2^n ≫ 2^m, many inputs are forced to map into the same bucket</p>
     <div class="viz"><iframe src="hash.html"></iframe></div>
     <h3>3.2 Compression Paradox</h3>
-    <p><strong>Claim.</strong> No lossless compression algorithm can compress every file to a shorter representation</p>
+    <p><strong>Claim.</strong> No lossless compression algorithm can compress <strong>every</strong> file to a shorter representation</p>
     <p><strong>Intuition.</strong> Suppose you have an algorithm C that maps any bit-string of length L into a shorter string of length < L.</p>
-    <p><strong>Counting argument.</strong> There are 2L distinct input strings of length L. But the algorithm can only output strings of length at most L − 1, so there are at most $$
-  2^0 + 2^1 + 2^2 + \dots + 2^{L-1} \;=\; 2^L - 1 \text{possible outputs} $$</p>
+    <p><strong>Counting argument.</strong> $$ \text{There are} \hspace{2mm} 2^L \hspace{2mm} \text{distinct input strings of length L. But the algorithm can only output strings of length at most L − 1, so there are at most} 
+  2^0 + 2^1 + 2^2 + \dots + 2^{L-1} \;=\; 2^L - 1 \hspace{2mm} \text{possible outputs} $$</p>
     <p><strong>Conclusion (pigeonhole).</strong> By PHP, at least two distinct inputs of length L must map to the same output. The compression fails to be lossless.</p>
     <p><strong>Corollary.</strong> Any “universal” compressor must expand some files—no magic algorithm compresses every file. In practice, compressors like ZIP exploit patterns in real-world data; but in the worst case
 (e.g., random data), they cannot shrink everything.</p>
