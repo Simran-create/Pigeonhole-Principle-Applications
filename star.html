@@ -4,39 +4,86 @@
   <meta charset="UTF-8">
   <title>Star–Triangle Diagram</title>
   <style>
-    body { text-align:center; padding:30px; font-family:Arial,sans-serif; }
-    svg { margin:auto; display:block; max-width:300px; }
-    .node { fill:#3498db; stroke:#2980b9; stroke-width:2; }
-    .edge { stroke-width:3; }
-    .red { stroke:#e74c3c; }
-    .blue { stroke:#2980b9; }
-    text { font-size:14px; }
+    body {
+      margin: 0;
+      padding: 20px 0 10px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    h3 {
+      margin: 10px 0 5px;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 320px;
+      height: auto;
+    }
+
+    .node {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2;
+    }
+
+    .edge {
+      stroke-width: 3;
+    }
+
+    .red {
+      stroke: #e74c3c;
+    }
+
+    .blue {
+      stroke: #2980b9;
+    }
+
+    text {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 12px auto 0;
+      max-width: 600px;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
 
   <h3>Ramsey: Star–Triangle</h3>
-  <svg viewBox="0 0 300 300">
-    <circle cx="150" cy="150" r="12" class="node"/>
-    <circle cx="150" cy="50"  r="12" class="node"/>
-    <circle cx="75"  cy="225" r="12" class="node"/>
-    <circle cx="225" cy="225" r="12" class="node"/>
 
-    <line x1="150" y1="150" x2="150" y2="50"  class="edge red"/>
-    <line x1="150" y1="150" x2="75"  y2="225" class="edge red"/>
-    <line x1="150" y1="150" x2="225" y2="225" class="edge red"/>
+  <svg viewBox="0 0 300 280" preserveAspectRatio="xMidYMid meet">
+    <!-- Nodes -->
+    <circle cx="150" cy="150" r="12" class="node" />
+    <circle cx="150" cy="50"  r="12" class="node" />
+    <circle cx="75"  cy="225" r="12" class="node" />
+    <circle cx="225" cy="225" r="12" class="node" />
 
-    <line x1="150" y1="50"  x2="75"  y2="225" class="edge blue"/>
-    <line x1="150" y1="50"  x2="225" y2="225" class="edge blue"/>
-    <line x1="75"  y1="225" x2="225" y2="225" class="edge blue"/>
+    <!-- Red edges -->
+    <line x1="150" y1="150" x2="150" y2="50"  class="edge red" />
+    <line x1="150" y1="150" x2="75"  y2="225" class="edge red" />
+    <line x1="150" y1="150" x2="225" y2="225" class="edge red" />
 
-    <text x="155" y="155">v1</text>
-    <text x="155" y="45">v2</text>
-    <text x=" 65" y="235">v3</text>
+    <!-- Blue edges -->
+    <line x1="150" y1="50"  x2="75"  y2="225" class="edge blue" />
+    <line x1="150" y1="50"  x2="225" y2="225" class="edge blue" />
+    <line x1="75"  y1="225" x2="225" y2="225" class="edge blue" />
+
+    <!-- Labels (adjusted positions) -->
+    <text x="157" y="153">v1</text>
+    <text x="157" y="43">v2</text>
+    <text x="60"  y="235">v3</text>
     <text x="235" y="235">v4</text>
   </svg>
 
-  <p>From <strong>v1</strong>, three red edges to <strong>v2, v3, v4</strong>. If any edge among them is red, you get a red triangle; otherwise all three are blue, giving a blue triangle.</p>
+  <p>
+    From <strong>v1</strong>, three red edges to <strong>v2, v3, v4</strong>. If any edge among them is red, you get a red triangle; otherwise all three are blue, giving a blue triangle.
+  </p>
 
 </body>
 </html>
