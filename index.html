@@ -198,7 +198,7 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     <p>Since we have mn + 1 indices but only mn possible (L, D) values with both coordinates (m, n), by PHP at least two indices i < j must share the same L(i), D(i) = L(j), D(j). </p>
     <p>One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
     <div class="center-img-container">
-      <img src="Grid of (L, D) values.png" alt="Grid of (L, D) values">    
+      <img src="Grid.png" alt="Grid of (L, D) values">    
     </div>
 
  
@@ -239,6 +239,15 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
       <li><strong>Symmetry Helps. </strong>When elements are exchangeable (e.g., vertices of a complete graph), you can assume one vertex is special and count its incident edges or neighbors.</li>
       <li><strong>Antichains and Chains. </strong>In partially ordered sets (posets), map each element to the length of the longest chain (or antichain) through it. Comparing lengths forces either a long chain or long antichain. This is the classic Dilworth/Erd&#337;s–Szekeres approach.</li>
     </ol>
+    <h3>5.3 Example: Covering Lattice Points</h3>
+    <p><strong>Problem. </strong>In a n × n grid of lattice points {1, 2, . . . , n}^2, color each point red or blue. Show there exists either a red “increasing diagonal” of length k or a blue “decreasing diagonal” of length k, provided n is large relative to k.</p>
+    <p>Pigeonhole Sketch.</p>
+    <p><strong>1.</strong> Label each point (i, j) with its “type” (i+j) mod (k−1). This puts all n^2 points into k −1 residue classes. If n^2 > (k-1)· T (where T is the 
+      max number of points avoiding monochromatic diagonals of length k), then some residue class contains “too many” same-colored points, forcing a diagonal.</p>
+    <p><strong>2.</strong> The choice of residue (i+j) mod (k −1) aligns “diagonal direction” with categories. Each category represents a parallel family of diagonals. 
+                           By forcing too many points in one category, you force a long diagonal of the same color.</p>
+    <p>This shows how a <strong>residue-mod trick</strong> (designing pigeonholes) delivers a combinatorial result about monochromatic patterns.</p>
+    
   </section>
 
   <section id="closing">
