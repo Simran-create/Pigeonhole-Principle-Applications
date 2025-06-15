@@ -74,7 +74,7 @@
     <ul>
       <li>✖️ Some functions must <strong>fail to be injective,</strong></li>
       <li>🗜️ Some data files <strong>can’t be compressed,</strong></li>
-      <li>🔐 Some cryptographic systems will <strong>eventually collide</strong></li>
+      <li>🔐 Some cryptographic systems will <strong>eventually collide,</strong></li>
       <li>♾️ And some infinite sets <strong>have no smallest member.</strong></li>
     </ul>
   </section>
@@ -93,9 +93,7 @@
      </p>
     <h3>1.3 Matching problems</h3>
     <p>If you have 5 red balls and 5 blue balls in 9 boxes, whatever arrangement, at least one box has at least 2 balls.</p>
-    <p>More generally, distributing n items into k catagories forces at least $$
-      \left\lceil \frac{n}{k} \right\rceil
-      $$ items in one catagory.</p>
+    <p>$$ \text{More generally, distributing n items into k catagories forces at least} \hspace{2mm} \left\lceil \frac{n}{k} \right\rceil \hspace{2mm} \text{items in one catagory.}$$</p>
     <h3>1.4 Why this simple idea matters</h3>
     <li><strong>Universality.</strong> Any time you try to squeeze more objects into fewer “slots,” you get overlap.</li>
     <li><strong>Certainty.</strong> Unlike probabilistic arguments, PHP yields a strict, deterministic guarantee.</li>
@@ -104,7 +102,7 @@
 
   <section id="infinite">
     <h2>2. Going Deeper—Infinite Applications</h2>
-    <p> While the finite PHP is easy, there are <strong>“infinite”</strong> analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>.
+    <p> While the finite PHP is easy, there are <strong>“infinite”</strong> analogues that let you extract surprising conclusions from seemingly weak assumptions.</p>
     <h3>2.1 Infinite Pigeonhole Principle</h3>
     <p><strong>Infinite Pigeonhole Principle (Weak form)</strong> If infinitely many objects (pigeons) are distributed among finitely many categories (holes), then at least one category must contain infinitely many objects.</p>
     <p><strong>Why.</strong> Suppose you have infinitely many items x1, x2, x3,... and only m catagories. If each category held only finitely many, say at most Ni in catagory i, then the total objects would be at most N1 + N2 + ... +Nm < ∞. That contradicts “infinitely many.” Hence some category is infinite.</p>
@@ -115,10 +113,10 @@
     <div class="viz"><iframe src="bins.html"></iframe></div>
     <h3>2.2 Dirichlet’s Approximation Theorem</h3>
     <p><strong>Dirichlet’s Theorem.</strong></p>
-    <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N    $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN},\quad 1\le q\le N$$ </p>
+    <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N    $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN}. $$ </p>
    
     <p><strong>Sketch using pigeonholes.</strong></p>
-    <p>1. Consider the N + 1 real numbers{ α }, { 2α }, { 3α }, . . . , { Nα },where {x} denotes the fractional part of {n}. Each { kα } lies in [0, 1).</p>
+    <p>1. Consider the N + 1 real numbers { α }, { 2α }, { 3α }, . . . , { Nα },where { x } denotes the fractional part of x. Each { kα } lies in [0, 1).</p>
     <p>2. Partition the interval [0, 1) into N smaller half-open subintervals (“holes”): $$
 [0,\tfrac{1}{N}), \;\; [\tfrac{1}{N},\tfrac{2}{N}), \;\dots,\; [\tfrac{N-1}{N},1).   $$</p>
     <p>3. By the (finite) PHP, two of the N + 1 fractional parts, say iα and jα with i < j ≤ N, must land in the same interval of length 1/N. Therefore,  $$
@@ -137,23 +135,23 @@
     <p>This view shows that no rational can equal √2, since rationals do not achieve these “too-good” approximations infinitely often.</p>
     <h3>2.4 Uncountability of the Real Numbers</h3>
       <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
-        <li>Suppose for contradiction R is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
+        <li>Suppose for contradiction <strong>R</strong> is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
         <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} \hspace{2mm} r_n \hspace{2mm} in \hspace{2mm} [0, 1]. $$
 Each s_n lies in one of the 10^n intervals of the for $$\bigl[\,0.d_1 d_2 \dots d_n,\hspace{2mm} \;0.d_1 d_2 \dots d_n + 10^{-n}\bigr).$$ </li>
         <li> For each n, assign r_n to the “interval” corresponding to its truncated form s_n. As n → ∞, we would be distributing infinitely many reals into 
              a <strong>strictly finite</strong> number of decimal-truncation intervals at each stage—forcing some interval to contain infinitely many “tails.”</li>
         <li> By a diagonal-type selection, you can then construct a real number not in your original list, contradicting countability. This is somewhat more involved than the standard diagonal, 
-but it highlights how <strong>infinitely many pigeons (reals) into finitely many “decimal-prefix slots”</strong> forces a new real outside the enumeration</li>
+but it highlights how <strong>infinitely many pigeons (real numbers) into finitely many “decimal-prefix slots”</strong> forces a new real outside the enumeration.</li>
       </ol></p>   
   </section>
 
   <section id="cs">
     <h2>3. Pigeonholes in Algorithms and Computer Science</h2>
-    <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications</p>
+    <p>Modern computer science often exploits pigeonhole reasoning to show collisions, impossibility of lossless compression, and security bounds. Below are key applications.</p>
     <h3>3.1 Hashing and Collisions</h3>
-    <p>$$ \text{Setup:} \hspace{2mm} \text{A hash function h} : \hspace{2mm} \{0, 1\}^n → \{0, 1\}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n} $$ </p>
+    <p>$$ \text{Setup:} \hspace{2mm} \text{A hash function h} : \hspace{2mm} \{0, 1\}^n → \{0, 1\}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n.}  $$ </p>
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
-          If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
+          If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision.</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
     <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (} \hspace{1mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm} x_{2^n} $$ </p> 
                   <p> $$ \text{Hash Buckets} \hspace{2mm} (2^m \hspace{2mm} \text{holes}):\hspace{2mm} [ \hspace{1mm} 0 \hspace{1mm} ] \hspace{2mm} [\hspace{1mm} 1 \hspace{1mm} ] \hspace{2mm} ... \hspace{2mm} [ \hspace{1mm} 2^m − 1 \hspace{1mm}] $$</p>
@@ -169,8 +167,8 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <h3>3.3 Birthday Attacks in Cryptography</h3>
     <p>Let H be a hash function producing m-bit outputs. If an adversary picks random inputs and computes hashes, then:</p>
     <p><strong>Birthday Paradox.</strong></p>
-    <p>$$ \text{After about} \hspace{1mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues become significant (50%).}$$ </p>
-    <p>$$ \text{Pigeonhole argument (simplified). There are} \hspace{1mm} 2^m \hspace{1mm} \text{hash-values (“holes”). Sampling N random inputs (“pigeons”),} $$ </p>
+    <p>$$ \text{After about} \hspace{2mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues become significant (≈50%).}$$ </p>
+    <p>$$ \textbf{Pigeonhole argument (simplified). There are} \hspace{1mm} 2^m \hspace{1mm} \text{hash-values (“holes”). Sampling N random inputs (“pigeons”),} $$ </p>
     <p>$$ \text{the expected number of collisions arises when} \hspace{1mm} N ≈ \sqrt{2^m}. \hspace{1mm} \text{Though not strictly PHP, the intuition stems from } $$ </p>
     <p>$$ \text{“ifyou place about the} \hspace{1mm} \sqrt{2^m} \hspace{1mm} \text{pigeons into} \hspace{1mm} 2^m \hspace{1mm} \text{holes, collisions become likely.”} $$</p>
     <p><strong>Implication.</strong> To resist birthday attacks, choose m large (e.g., m = 256 for SHA-256). Then 2^128 effort is required to find a collision by brute force, which is currently computationally infeasible.</p>
@@ -189,20 +187,20 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     
     <p><strong>Theorem (Erd&#337;s–Szekeres).</strong></p>
     <p>Any sequence of mn + 1 distinct real numbers contains either an increasing subsequence of length m + 1 or a decreasing subsequence of length n + 1.</p>
-    <p><strong>Proof Sketch (pigeonhole coloration).</strong> $$ \text{1. Let the sequence be} \hspace{2mm} a1, a2, . . . , a_{m.n} +1.$$</p>
+    <p><strong>Proof Sketch (pigeonhole coloration).</strong> $$ \text{1. Let the sequence be} \hspace{2mm} a_1, a_2, . . . , a_{m.n} +1.$$</p>
     <p>2. For each position i, define two numbers: <br>
       L(i) = length of longest increasing subsequence starting at a_i. <br> D(i) = length of longest decreasing subsequence starting at a_i.</p>
     <p>3. We know 1 ≤ L(i) ≤ m + 1 and 1 ≤ D(i) ≤ n + 1. Consider the set of ordered pairs {(L(i), D(i)) : 1 ≤ i ≤ mn + 1}.</p>
     <p>4.  There are only m × n possible pairs (u, v) with 1 ≤ u ≤ m and 1 ≤ v ≤ n. Actually, if either L(i) = m+1 or D(i) = n+1 for some i, 
 we are done (we found our long monotonic subsequence). Otherwise, each i corresponds to a pair in {1, . . . , m} × {1, . . . , n}.</p>
-    <p>Since we have mn + 1 indices but only mn possible (L, D) values with both coordinates (m, n), by PHP at least two indices i < j must share the same L(i), D(i) = L(j), D(j). </p>
+    <p>Since we have mn + 1 indices but only mn possible (L, D) values with both coordinates (m, n), by PHP at least two indices i < j must share the same L(i), D(i) = L( j ), D( j ). </p>
     <p>One then shows—by comparing ai and aj—that either there is a longer increasing or a longer decreasing subsequence than assumed, contradiction. Hence the desired monotonic subsequence must exist.</p>
     <div class="center-img-container">
       <img src="Grid.png" alt="Grid of (L, D) values">    
     </div>
 
  
-    <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existe</p>
+    <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existed.</p>
     <h3><strong>$$ \text{4.2 Ramsey Theory: Triangles in} \hspace{2mm} K_6 $$</strong></h3>
     <p>Fact. Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</p>
     <p><strong>Pigeonhole proof sketch</strong></p>
@@ -221,11 +219,11 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
   <section id="art">
     <h2>5. The Art of Finding the Right Pigeonholes</h2>
     <p>So far, we’ve applied pigeonhole in rather straightforward ways—grouping objects by obvious categories. In more advanced problems, 
-      the creative insight is in designing the “holes” so that the PHP yields a nontrivial conclusion.</p>
+      the <strong>creative insight</strong> is in designing the “holes” so that the PHP yields a nontrivial conclusion.</p>
     <h3>5.1 The “Duality” of Pigeonhole: Existence vs. Impossibility</h3>
     <p><li><strong>Existence proofs.</strong> Show that a certain structure must exist. Example: Erd&#337;s–Szekeres guarantees a long monotonic subsequence.</li>
     <li><strong>Impossibility proofs.</strong> Show that a certain algorithm or mapping cannot exist. Example: compression paradox, hashing injectivity.</li></p>
-    <p>In both, you define a mapping (objects) → (categories), and then count objects vs. categories.</p>
+    <p>In both, you define a mapping (objects) <strong>→</strong> (categories), and then count objects vs. categories.</p>
     <h3>5.2 Choosing Pigeonholes: Several Tips</h3>
     <ol>
       <li><strong>Map to a Finite Set.</strong> If you suspect an infinite conclusion (e.g., find infinitely many with some property), map infinitely many items to a finite set (e.g., basic types, intervals, residues modulo m).</li>
@@ -241,7 +239,7 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     </ol>
     <h3>5.3 Example: Covering Lattice Points</h3>
     <p><strong>Problem. </strong>In a n × n grid of lattice points {1, 2, . . . , n}^2, color each point red or blue. Show there exists either a red “increasing diagonal” of length k or a blue “decreasing diagonal” of length k, provided n is large relative to k.</p>
-    <p>Pigeonhole Sketch.</p>
+    <p><strong>Pigeonhole Sketch.</strong></p>
     <p><strong>1.</strong> Label each point (i, j) with its “type” (i+j) mod (k−1). This puts all n^2 points into k −1 residue classes. If n^2 > (k-1)· T (where T is the 
       max number of points avoiding monochromatic diagonals of length k), then some residue class contains “too many” same-colored points, forcing a diagonal.</p>
     <p><strong>2.</strong> The choice of residue (i+j) mod (k −1) aligns “diagonal direction” with categories. Each category represents a parallel family of diagonals. 
