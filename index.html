@@ -155,12 +155,12 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
           If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
-    <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (} \hspace{2mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm}x_2n $$ <br> 
-                    $$ \text{Hash Buckets} \hspace{2mm} (2^m \hspace{2mm} \text{holes}): [ 0 ] [ 1 ] ... [ 2m − 1 ] $$</p>
-    <p>Since 2^n ≫ 2^m, many inputs are forced to map into the same bucket</p>
+    <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (} \hspace{1mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm} x_{2^n} $$ </p> 
+                  <p> $$ \text{Hash Buckets} \hspace{2mm} (2^m \hspace{2mm} \text{holes}):\hspace{2mm} [ \hspace{1mm} 0 \hspace{1mm} ] \hspace{2mm} [\hspace{1mm} 1 \hspace{1mm} ] \hspace{2mm} ... \hspace{2mm} [ \hspace{1mm} 2^m − 1 \hspace{1mm}] $$</p>
+    <p>Since 2^n ≫ 2^m, many inputs are forced to map into the same bucket.</p>
     <div class="viz"><iframe src="hash.html"></iframe></div>
     <h3>3.2 Compression Paradox</h3>
-    <p><strong>Claim.</strong> No lossless compression algorithm can compress <strong>every</strong> file to a shorter representation</p>
+    <p><strong>Claim.</strong> No lossless compression algorithm can compress <strong>every</strong> file to a shorter representation.</p>
     <p><strong>Intuition.</strong> Suppose you have an algorithm C that maps any bit-string of length L into a shorter string of length < L.</p>
     <p><strong>Counting argument.</strong> $$ \text{There are} \hspace{2mm} 2^L \hspace{2mm} \text{distinct input strings of length L. But the algorithm can only output strings of length } $$ </p>
     <p> $$ \text{at most L − 1, so there are at most} \hspace{2mm} 2^0 + 2^1 + 2^2 + \dots + 2^{L-1} \;=\; 2^{L}-1 \hspace{2mm} \text{possible outputs.} $$</p>
@@ -207,8 +207,8 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     <p>Fact. Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</p>
     <p><strong>Pigeonhole proof sketch</strong></p>
     <p><strong>1.</strong> Label vertices V = {v1, v2, v3, v4, v5, v6}. Consider vertex v1. It has 5 incident edges, each colored red (R) or blue (B).</p>
-    <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1-v2, v1-v3, v1-v4} are all re</p>
-    <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2-v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2v3, v3v4, v2v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
+    <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1-v2, v1-v3, v1-v4} are all red.</p>
+    <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2-v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2-v3, v3-v4, v2-v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
     <p><strong>4.</strong> In either case, we find a monochromatic triangle.</p>
       <div class="viz"><iframe src="star.html"></iframe></div>
     <p>From v1, three red edges go to v2, v3, v4. Among {v2, v3, v4}, either a red edge exists (closing a red triangle) or all are blue (forming a blue triangle).</p>
