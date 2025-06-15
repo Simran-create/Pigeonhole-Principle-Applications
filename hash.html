@@ -71,6 +71,7 @@
       font-size: 1.2em;
       font-weight: bold;
       color: #c0392b;
+      min-height: 1.4em; /* reserve space to prevent layout shift */
     }
   </style>
 </head>
@@ -92,24 +93,25 @@
 
   <script>
     let cnt = [0, 0, 0, 0];
-    const bucketLabels = ['00', '01', '10', '11'];
+    const labels = ['00', '01', '10', '11'];
 
     function add() {
       let num = Math.floor(Math.random() * 16).toString(2).padStart(4, '0');
       let i = parseInt(num.slice(-2), 2);
       cnt[i]++;
+
       let el = document.getElementById('b' + i);
       el.querySelector('.count').textContent = cnt[i];
-      
-      let msgEl = document.getElementById('message');
+
+      const msg = document.getElementById('message');
       if (cnt[i] >= 2) {
         el.classList.add('collide');
-        msgEl.textContent = `💡 Hash clash in bucket ${bucketLabels[i]}!`;
+        msg.textContent = `💡 Hash clash in bucket ${labels[i]}!`;
         setTimeout(() => {
           el.classList.remove('collide');
         }, 300);
       } else {
-        msgEl.textContent = ''; // clear message
+        msg.textContent = '';
       }
     }
 
