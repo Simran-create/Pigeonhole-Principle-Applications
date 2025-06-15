@@ -31,8 +31,8 @@
   }
 
   .center-img-container img {
-    max-width: 50%;
-    max-height: 50vh;
+    max-width: 65%;
+    max-height: 65vh;
     height: auto;
     display: inline-block;
     vertical-align: middle;
@@ -81,8 +81,8 @@
 
   <section id="baby">
     <h2>1. The Baby Pigeonhole Principle</h2>
-    <h3>Formal Statement</h3>
-    <p><strong>1.1 Pigeonhole Principle (finite version):</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
+    <h3>1.1 Pigeonhole Principle (finite version):</h3>
+    <p><strong>Formal Statement</strong> Suppose n objects (pigeons) are distributed among m containers (holes). If n > m, then at least one container must contain at least two objects.</p>
     <p>Alternatively, if each container has at most one object, you can place at most m objects total. Once you place a (m+1)th, you force a container to have two.</p>
     <h3>Visual Demonstration</h3>
     <div class="viz"><iframe src="socks.html"></iframe></div>
@@ -138,8 +138,8 @@
     <h3>2.4 Uncountability of the Real Numbers</h3>
       <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
         <li>Suppose for contradiction R is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
-        <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} \hspace{2mm} r_n n [0, 1]. $$
-Each s_n lies in one of the 10^n intervals of the for $$\bigl[\,0.d_1 d_2 \dots d_n,\;0.d_1 d_2 \dots d_n + 10^{-n}\bigr).$$ </li>
+        <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} \hspace{2mm} r_n \hspace{2mm} in \hspace{2mm} [0, 1]. $$
+Each s_n lies in one of the 10^n intervals of the for $$\bigl[\,0.d_1 d_2 \dots d_n,\hspace{2mm} \;0.d_1 d_2 \dots d_n + 10^{-n}\bigr).$$ </li>
         <li> For each n, assign r_n to the “interval” corresponding to its truncated form s_n. As n → ∞, we would be distributing infinitely many reals into 
              a <strong>strictly finite</strong> number of decimal-truncation intervals at each stage—forcing some interval to contain infinitely many “tails.”</li>
         <li> By a diagonal-type selection, you can then construct a real number not in your original list, contradicting countability. This is somewhat more involved than the standard diagonal, 
@@ -155,32 +155,31 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
           If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
-    <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs} \hspace{2mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm}x_2n $$</p>
-    <p>Hash Buckets (2^m holes): [ 0 ] [ 1 ] ... [ 2m − 1 ]</p>
+    <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (} \hspace{2mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm}x_2n $$ <br> 
+                    $$ \text{Hash Buckets} \hspace{2mm} (2^m \hspace{2mm} \text{holes}): [ 0 ] [ 1 ] ... [ 2m − 1 ] $$</p>
     <p>Since 2^n ≫ 2^m, many inputs are forced to map into the same bucket</p>
     <div class="viz"><iframe src="hash.html"></iframe></div>
     <h3>3.2 Compression Paradox</h3>
     <p><strong>Claim.</strong> No lossless compression algorithm can compress <strong>every</strong> file to a shorter representation</p>
     <p><strong>Intuition.</strong> Suppose you have an algorithm C that maps any bit-string of length L into a shorter string of length < L.</p>
-    <p><strong>Counting argument.</strong> $$ \text{There are} \hspace{2mm} 2^L \hspace{2mm} \text{distinct input strings of length L. But the algorithm can only output strings of length at most L − 1,} $$ </p>
-    <p> $$ \text{so there are at most} 2^0 + 2^1 + 2^2 + \dots + 2^{L-1} \;=\; 2^{L}-1 \hspace{2mm} \text{possible outputs} $$</p>
+    <p><strong>Counting argument.</strong> $$ \text{There are} \hspace{2mm} 2^L \hspace{2mm} \text{distinct input strings of length L. But the algorithm can only output strings of length } $$ </p>
+    <p> $$ \text{at most L − 1, so there are at most} \hspace{2mm} 2^0 + 2^1 + 2^2 + \dots + 2^{L-1} \;=\; 2^{L}-1 \hspace{2mm} \text{possible outputs.} $$</p>
     <p><strong>Conclusion (pigeonhole).</strong> By PHP, at least two distinct inputs of length L must map to the same output. The compression fails to be lossless.</p>
-    <p><strong>Corollary.</strong> Any “universal” compressor must expand some files—no magic algorithm compresses every file. In practice, compressors like ZIP exploit patterns in real-world data; but in the worst case
-(e.g., random data), they cannot shrink everything.</p>
+    <p><strong>Corollary.</strong> Any “universal” compressor must expand some files; no magic algorithm compresses every file. In practice, compressors like ZIP exploit patterns in real-world data; but in the worst case (e.g., random data), they cannot shrink everything.</p>
     <h3>3.3 Birthday Attacks in Cryptography</h3>
     <p>Let H be a hash function producing m-bit outputs. If an adversary picks random inputs and computes hashes, then:</p>
     <p><strong>Birthday Paradox.</strong></p>
-    <p>$$ \text{After about} \hspace{1mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues become significant (50%).}$$</p>
-    <p>$$ \text{Pigeonhole argument (simplified). There are} \hspace{1mm} 2^m \hspace{1mm} \text{hash-values (“holes”). Sampling N random inputs (“pigeons”),} $$ </p>
-    <p>$$ \text{the expected number of collisions arises when} \hspace{1mm} N ≈ \sqrt{2^m}. \hspace{1mm} \text{Though not strictly PHP, the intuition stems from “if} $$ </p>
-    <p>$$ \text{you place about the} \hspace{1mm} \sqrt{2^m} \hspace{1mm} \text{pigeons into} \hspace{1mm} 2^m \hspace{1mm} \text{holes, collisions become likely.”} $$</p>
+    <p>$$ \text{After about} \hspace{1mm} 2^{m/2} \hspace{1mm} \text{random inputs, the probability of finding a collision in hashvalues become significant (50%).}$$ <br>
+      $$ \text{Pigeonhole argument (simplified). There are} \hspace{1mm} 2^m \hspace{1mm} \text{hash-values (“holes”). Sampling N random inputs (“pigeons”),} $$ <br>
+      $$ \text{the expected number of collisions arises when} \hspace{1mm} N ≈ \sqrt{2^m}. \hspace{1mm} \text{Though not strictly PHP, the intuition stems from } $$ <br>
+      $$ \text{“ifyou place about the} \hspace{1mm} \sqrt{2^m} \hspace{1mm} \text{pigeons into} \hspace{1mm} 2^m \hspace{1mm} \text{holes, collisions become likely.”} $$</p>
     <p><strong>Implication.</strong> To resist birthday attacks, choose m large (e.g., m = 256 for SHA-256). Then 2^128 effort is required to find a collision by brute force, which is currently computationally infeasible.</p>
     <h3>3.4 Load Balancing and Cache Design</h3>
     <p>Suppose you have k servers (or cache slots) and want to assign n tasks (or memory blocks) dynamically:</p>
-    <p>If n > k and tasks are all “hot,” by simple pigeonhole, at least one server must handle at least ⌈n/k⌉ tasks simultaneously—creating a bottleneck.</p>
-    <p><strong>Cache lines.</strong> Consider a CPU cache with B cache lines and N distinct memory blocks. If a program accesses N blocks where N > B 
+    <p>If n > k and tasks are all “hot,” by simple pigeonhole, at least one server must handle at least ⌈ n/k ⌉ tasks simultaneously—creating a bottleneck.</p>
+    <p><strong>Cache lines.</strong> Consider a CPU cache with B cache lines and N distinct memory blocks. If a program accesses N blocks where <br> N > B 
  while reusing them in some pattern, eventually some cache line must evict another (due to PHP). This underlies cache-miss lower bounds in algorithms.</p>
-    <p><strong>Balanced hashing (Cuckoo, Consistent Hashing).</strong>strong> These techniques try to distribute “pigeons” (requests) evenly among “holes” (servers), but ultimately if you have more requests than servers, some server must bear extra load.</p> 
+    <p><strong>Balanced hashing (Cuckoo, Consistent Hashing).</strong> These techniques try to distribute “pigeons” (requests) evenly among “holes” (servers), but ultimately if you have more requests than servers, some server must bear extra load.</p> 
   </section>
 
   <section id="proofs">
@@ -190,7 +189,7 @@ but it highlights how <strong>infinitely many pigeons (reals) into finitely many
     
     <p><strong>Theorem (Erd&#337;s–Szekeres).</strong></p>
     <p>Any sequence of mn + 1 distinct real numbers contains either an increasing subsequence of length m + 1 or a decreasing subsequence of length n + 1.</p>
-    <p><strong>Proof Sketch (pigeonhole coloration).</strong> 1. Let the sequence be a1, a2, . . . , a_mn+1.</p>
+    <p><strong>Proof Sketch (pigeonhole coloration).</strong> $$ \text{1. Let the sequence be} \hspace{2mm} a1, a2, . . . , a_mn +1.$$</p>
     <p>2. For each position i, define two numbers: <br>
       L(i) = length of longest increasing subsequence starting at a_i. <br> D(i) = length of longest decreasing subsequence starting at a_i.</p>
     <p>3. We know 1 ≤ L(i) ≤ m + 1 and 1 ≤ D(i) ≤ n + 1. Consider the set of ordered pairs {(L(i), D(i)) : 1 ≤ i ≤ mn + 1}.</p>
@@ -204,15 +203,16 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
 
  
     <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existe</p>
-    <h3><strong>$$ \text{4.2 Ramsey Theory: Triangles in} K_6 $$</strong></h3>
+    <h3><strong>$$ \text{4.2 Ramsey Theory: Triangles in} \hspace{2mm} K_6 $$</strong></h3>
     <p>Fact. Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</p>
     <p><strong>Pigeonhole proof sketch</strong></p>
     <p><strong>1.</strong> Label vertices V = {v1, v2, v3, v4, v5, v6}. Consider vertex v1. It has 5 incident edges, each colored red (R) or blue (B).</p>
-    <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1v2, v1v3, v1v4} are all re</p>
-    <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2v3, v3v4, v2v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
+    <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1-v2, v1-v3, v1-v4} are all re</p>
+    <p><strong>3.</strong> Now look at the triangle formed by vertices v2, v3, v4. If any of those edges is red, say {v2-v3}, then {v1, v2, v3} forms a red triangle. If none are red, all three edges {v2v3, v3v4, v2v4} must be blue, forming a blue triangle among {v2, v3, v4}.</p>
     <p><strong>4.</strong> In either case, we find a monochromatic triangle.</p>
       <div class="viz"><iframe src="star.html"></iframe></div>
     <p>From v1, three red edges go to v2, v3, v4. Among {v2, v3, v4}, either a red edge exists (closing a red triangle) or all are blue (forming a blue triangle).</p>
+    
     <h3>5.3 Monochromatic Subsets (Ramsey-Flavored)</h3>
     <p>More generally, if you color the edges of a sufficiently large complete graph K_n in c colors, pigeonhole arguments often help find monochromatic cliques of a given size. 
                        While standard proofs use induction, the base cases rely on simple pigeonhole partitions of edges.</p>
@@ -237,7 +237,7 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
       </uL></li>
       <li><strong>Look for Quantitative Bounds. </strong>If a problem asks to prove “some subset of size k exists,” you often partition into fewer than k categories—forcing a large class by PHP.</li>
       <li><strong>Symmetry Helps. </strong>When elements are exchangeable (e.g., vertices of a complete graph), you can assume one vertex is special and count its incident edges or neighbors.</li>
-      <li><strong>Antichains and Chains. </strong>In partially ordered sets (posets), map each element to the length of the longest chain (or antichain) through it. Comparing lengths forces either a long chain or long antichain. This is the classic Dilworth/Erd˝os–Szekeres approach.</li>
+      <li><strong>Antichains and Chains. </strong>In partially ordered sets (posets), map each element to the length of the longest chain (or antichain) through it. Comparing lengths forces either a long chain or long antichain. This is the classic Dilworth/Erd&#337;s–Szekeres approach.</li>
     </ol>
   </section>
 
@@ -251,13 +251,13 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     </p>
     <p>Every time you feel stuck—when a problem hints at “too many items to fit in too few categories”—reach for the Pigeonhole Principle.</p>
     <p><strong>Call to Action. </strong>Next time you see “more objects than categories,” pause. Can you define the categories (pigeonholes) so that PHP gives you exactly the statement you need? Look around—every limitation hides a powerful truth waiting to be unearthed.</p>
-    <h3>7.1 Further Exploration</h3>
+    <h3>6.1 Further Exploration</h3>
     <p>If you want to dive deeper, consider these <strong>self-contained</strong> exercises:</p>
     <p><strong>1. Dirichlet’s Bound on π.</strong> Show that there are infinitely many rational approximations p/q to π satisfying $$\left|\pi - \tfrac{p}{q}\right| < \tfrac{1}{q^2},$$ using a pigeonhole partition of {kπ} into intervals of length 1/N.</p>
-    <p><strong>2. Ramsey Number R(4, 4).</strong> By extending the “star-center” pigeonhole idea, prove that any 2-coloring of <code>K_18</code> contains a monochromatic K4. 
+    <p><strong>2. Ramsey Number R(4, 4).</strong> By extending the “star-center” pigeonhole idea, prove that any 2-coloring of K_18 contains a monochromatic K4. 
       (Hint: Partition edges incident to a vertex into two colors; then apply the R(3, 3) = 6 result on neighbors.)</p>
 
-    <p><strong>3.Generalized PHP in Metric Spaces.</strong> Given infinitely many points in [0, 1]^2, partition the square into a n×n grid of little squares. Show one small square contains infinitely many points—yielding a cluster point for Bolzano–Weierstrass.</p>
+    <p><strong>3. Generalized PHP in Metric Spaces.</strong> Given infinitely many points in [0, 1]^2, partition the square into a n×n grid of little squares. Show one small square contains infinitely many points—yielding a cluster point for Bolzano–Weierstrass.</p>
     <blockquote>Each of these tasks reinforces the key insight: finite partitions force infinite structure.</blockquote>
     <p><strong>Remember:</strong> The simplest idea—“if more pigeons than holes, two share a hole”—is often the key to both elementary and deep mathematical—and computational—truths. Happy pigeonholing!</p>
     <h3>References:</h3>
