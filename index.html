@@ -366,7 +366,7 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
  
     <p>Once two indices map to the same grid cell (u, v) and neither coordinate is at the max, one of the monotonic subsequences can be extended—leading to a contradiction if you assumed no long subsequences existed.</p>
     <h3><strong>$$ \text{4.2 Ramsey Theory: Triangles in} \hspace{2mm} K_6 $$</strong></h3>
-    <p>Fact. Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</p>
+    <p><strong>Fact.</strong> <em>Any 2-coloring of the edges of the complete graph K6 on 6 vertices must contain a monochromatic triangle (either all-red or all-blue).</em></p>
     <p><strong>Pigeonhole proof sketch</strong></p>
     <p><strong>1.</strong> Label vertices V = {v1, v2, v3, v4, v5, v6}. Consider vertex v1. It has 5 incident edges, each colored red (R) or blue (B).</p>
     <p><strong>2.</strong> By PHP, at least three of those edges must share the same color, say red. Without loss of generality, edges {v1-v2, v1-v3, v1-v4} are all red.</p>
@@ -380,8 +380,8 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
 <div class="demo-box" id="ramsey-demo">
   <div class="demo-title">🔺 Ramsey Theory — Monochromatic Triangle Game</div>
   <div class="explanation">
-    You are coloring edges of a complete graph with <b>6 nodes</b>. Click an edge to toggle its color (blue 🔵 or red 🔴).
-    Can you force or avoid a monochromatic triangle?
+    You are coloring edges of a complete graph with <b>6 nodes</b>. Click an edge to toggle its color (blue 🔵 or red 🔴). <br>
+    Can you avoid a monochromatic triangle?
   </div>
   <svg id="ramsey-svg" width="400" height="400"></svg>
   <div id="RM-output"></div>
