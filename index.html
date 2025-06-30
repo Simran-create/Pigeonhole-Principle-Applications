@@ -612,56 +612,70 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
   }
 })();
 
+
 (function(){
   const canvas = document.getElementById('art-canvas');
   const ctx = canvas.getContext('2d');
   const d1 = document.getElementById('divider1');
   const d2 = document.getElementById('divider2');
+  const canvasWidth = canvas.width;
+  const pigeonCount = 30;
+  const pigeonSpacing = (canvasWidth - 20) / (pigeonCount - 1);
+
   let dragging = null;
 
+  // Draw pigeon dots
   function draw() {
-    ctx.clearRect(0, 0, 600, 60);
-    for (let i = 0; i < 30; i++) {
-      const x = 10 + i * (580 / 29);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const x1 = parseInt(d1.style.left);
+    const x2 = parseInt(d2.style.left);
+
+    let counts = [0, 0, 0];
+
+    for (let i = 0; i < pigeonCount; i++) {
+      const x = 10 + i * pigeonSpacing;
+      let bucket = x < x1 ? 0 : (x < x2 ? 1 : 2);
+      counts[bucket]++;
+
       ctx.beginPath();
-      ctx.arc(x, 30, 6, 0, 2 * Math.PI);
-      ctx.fillStyle = '#f80';
-      ctx.shadowColor = '#f80';
-      ctx.shadowBlur = 5;
+      ctx.arc(x, 30, 6.5, 0, 2 * Math.PI);
+      ctx.fillStyle = `hsl(${i * 12}, 90%, 55%)`; // Distinct pigeon colors
+      ctx.shadowColor = "rgba(0,0,0,0.15)";
+      ctx.shadowBlur = 2;
       ctx.fill();
-      ctx.shadowBlur = 0;
     }
 
-    const x1 = parseInt(d1.style.left),
-          x2 = parseInt(d2.style.left);
-
-    const c1 = Math.floor(x1 / 580 * 30);
-    const c2 = Math.floor((x2 - x1) / 580 * 30);
-    const c3 = 30 - c1 - c2;
-
     document.getElementById('art-output').textContent =
-      `Counts: [${c1}, ${c2}, ${c3}] → max ≥ ⌈30/3⌉ = ${Math.ceil(30 / 3)}`;
+      `Counts: [${counts.join(', ')}] → max ≥ ⌈30/3⌉ = ${Math.ceil(30 / 3)}`;
   }
 
   [d1, d2].forEach(div => {
-    div.onmousedown = e => dragging = div;
+    div.onmousedown = e => {
+      dragging = div;
+      e.preventDefault();
+    };
   });
 
   window.onmouseup = () => dragging = null;
 
   window.onmousemove = e => {
     if (!dragging) return;
+
     const parent = dragging.parentElement.getBoundingClientRect();
     let x = e.clientX - parent.left;
-    x = Math.max(0, Math.min(600, x));
+    x = Math.max(0, Math.min(canvasWidth, x));
+
+    // Prevent overlap
     if (dragging === d1) x = Math.min(x, parseInt(d2.style.left) - 40);
     else x = Math.max(x, parseInt(d1.style.left) + 40);
+
     dragging.style.left = x + 'px';
     draw();
   };
 
   draw();
 })();
+
 </script>
 
     
