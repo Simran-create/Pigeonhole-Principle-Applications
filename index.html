@@ -136,9 +136,35 @@
   }
 </style>
 
+<style>
+  .demo-box {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff7ee;
+    border: 3px solid #ffd59a;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+  }
 
+  .demo-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #5c3900;
+    margin-bottom: 0.75rem;
+  }
 
+  .explanation {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
 
+  #art-canvas {
+    pointer-events: none;
+  }
+</style>
 
   <!-- MathJax configuration -->
   <script>
@@ -378,12 +404,22 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
      <section id="art">
 <!--     <h2>4. Art of Finding the Right Pigeonholes</h2> -->
     <p>Drag the dividers to rebalance how many “pigeons” fall in each hole.</p>
-    <div style="position:relative; width:600px; height:50px; background:#eee;">
-      <div id="divider1" style="position:absolute; left:200px; width:4px; top:0; height:100%; background:#333; cursor: ew-resize;"></div>
-      <div id="divider2" style="position:absolute; left:400px; width:4px; top:0; height:100%; background:#333; cursor: ew-resize;"></div>
-      <canvas id="art-canvas" width="600" height="50" style="position:absolute; top:0; left:0;"></canvas>
-    </div>
-    <div id="art-output"></div>
+<div class="demo-box" id="pigeonhole-demo">
+  <div class="demo-title">🕊️ Choosing Pigeonholes — Interactive Partitioning</div>
+  <div class="explanation">
+    You have <b>30 pigeons</b> spread along a line. <br>
+    <b>Drag the black dividers</b> to choose pigeonholes and see how the counts shift!
+  </div>
+
+  <div style="position: relative; width: 600px; height: 60px; background: #f4f4f4; margin: 0 auto; border-radius: 8px;">
+    <div id="divider1" style="position:absolute; left:200px; width:4px; top:0; height:100%; background:#222; cursor: ew-resize;"></div>
+    <div id="divider2" style="position:absolute; left:400px; width:4px; top:0; height:100%; background:#222; cursor: ew-resize;"></div>
+    <canvas id="art-canvas" width="600" height="60" style="position:absolute; top:0; left:0;"></canvas>
+  </div>
+
+  <div id="art-output" style="margin-top:1rem; font-family:monospace; font-size:0.95rem;"></div>
+</div>
+
     </section>
     <ol>
       <li><strong>Map to a Finite Set.</strong> If you suspect an infinite conclusion (e.g., find infinitely many with some property), map infinitely many items to a finite set (e.g., basic types, intervals, residues modulo m).</li>
@@ -576,51 +612,58 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
   }
 })();
 
+(function(){
+  const canvas = document.getElementById('art-canvas');
+  const ctx = canvas.getContext('2d');
+  const d1 = document.getElementById('divider1');
+  const d2 = document.getElementById('divider2');
+  let dragging = null;
 
-  // --- 4. Art of Finding Right Pigeonholes ---
-  (function(){
-    const canvas = document.getElementById('art-canvas');
-    const ctx = canvas.getContext('2d');
-    const d1 = document.getElementById('divider1');
-    const d2 = document.getElementById('divider2');
-    let dragging = null;
-    function draw() {
-      ctx.clearRect(0,0,600,50);
-      // draw 30 pigeons
-      for(let i=0;i<30;i++){
-        const x = 10 + i*(580/29);
-        ctx.beginPath();
-        ctx.arc(x,25,5,0,2*Math.PI);
-        ctx.fillStyle = '#f80';
-        ctx.fill();
-      }
-      // show counts
-      const x1 = parseInt(d1.style.left),
-            x2 = parseInt(d2.style.left);
-      const c1 = Math.floor(x1/580*30),
-            c2 = Math.floor((x2-x1)/580*30),
-            c3 = 30 - c1 - c2;
-      document.getElementById('art-output').textContent =
-        `Counts: [${c1}, ${c2}, ${c3}] → max ≥ ⌈30/3⌉ = 10`;
+  function draw() {
+    ctx.clearRect(0, 0, 600, 60);
+    for (let i = 0; i < 30; i++) {
+      const x = 10 + i * (580 / 29);
+      ctx.beginPath();
+      ctx.arc(x, 30, 6, 0, 2 * Math.PI);
+      ctx.fillStyle = '#f80';
+      ctx.shadowColor = '#f80';
+      ctx.shadowBlur = 5;
+      ctx.fill();
+      ctx.shadowBlur = 0;
     }
-    [d1,d2].forEach(div=>{
-      div.onmousedown = e=> dragging = div;
-    });
-    window.onmouseup = ()=> dragging = null;
-    window.onmousemove = e=>{
-      if(!dragging) return;
-      const parent = dragging.parentElement.getBoundingClientRect();
-      let x = e.clientX - parent.left;
-      x = Math.max(0, Math.min(600, x));
-      // enforce ordering
-      if(dragging===d1) x = Math.min(x, parseInt(d2.style.left)-20);
-      else x = Math.max(x, parseInt(d1.style.left)+20);
-      dragging.style.left = x + 'px';
-      draw();
-    };
+
+    const x1 = parseInt(d1.style.left),
+          x2 = parseInt(d2.style.left);
+
+    const c1 = Math.floor(x1 / 580 * 30);
+    const c2 = Math.floor((x2 - x1) / 580 * 30);
+    const c3 = 30 - c1 - c2;
+
+    document.getElementById('art-output').textContent =
+      `Counts: [${c1}, ${c2}, ${c3}] → max ≥ ⌈30/3⌉ = ${Math.ceil(30 / 3)}`;
+  }
+
+  [d1, d2].forEach(div => {
+    div.onmousedown = e => dragging = div;
+  });
+
+  window.onmouseup = () => dragging = null;
+
+  window.onmousemove = e => {
+    if (!dragging) return;
+    const parent = dragging.parentElement.getBoundingClientRect();
+    let x = e.clientX - parent.left;
+    x = Math.max(0, Math.min(600, x));
+    if (dragging === d1) x = Math.min(x, parseInt(d2.style.left) - 40);
+    else x = Math.max(x, parseInt(d1.style.left) + 40);
+    dragging.style.left = x + 'px';
     draw();
-  })();
-  </script>
+  };
+
+  draw();
+})();
+</script>
+
     
     <h3>References:</h3>
     <p><strong>1. </strong><a href="https://en.wikipedia.org/wiki/Pigeonhole_principle"> Pigeonhole Principle - Wikipedia</a></p>
