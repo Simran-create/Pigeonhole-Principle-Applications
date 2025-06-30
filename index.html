@@ -39,6 +39,64 @@
     margin: 0 auto;
   }
   </style>
+  <style>
+  .demo-box {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #f8f9ff;
+    border: 3px solid #a6c8ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  .demo-box h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #234;
+  }
+
+  .demo-box canvas,
+  .demo-box svg {
+    margin: 1rem auto;
+    display: block;
+  }
+
+  .demo-box .controls {
+    margin-bottom: 1rem;
+  }
+
+  .demo-box input,
+  .demo-box button {
+    margin: 0.2rem 0.4rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .demo-box #D-output,
+  .demo-box #ES-output,
+  .demo-box #RM-output,
+  .demo-box #art-output {
+    margin-top: 0.8rem;
+    font-family: monospace;
+    color: #444;
+  }
+
+  .demo-title {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #003366;
+  }
+
+  .explanation {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+</style>
+
 
 
 
@@ -144,7 +202,7 @@
         <li>But Dirichlet’s theorem guarantees infinitely many rational approximations p/q with $$
    \left| \sqrt{2} - \frac{p}{q} \right| < \frac{1}{q\,N}. $$  For large N, 1/qN < 0 is impossible, so no exact equality can hold.</li></ol></p>
     <p>This view shows that no rational can equal √2, since rationals do not achieve these “too-good” approximations infinitely often.</p>
-    <h3>2.4 Uncountability of the Real Numbers</h3>
+<!--     <h3>2.4 Uncountability of the Real Numbers</h3>
       <p>While Cantor’s diagonal argument is the most common proof, here is a pigeonhole-flavored reasoning: <ol>
         <li>Suppose for contradiction <strong>R</strong> is countable. List all real numbers in [0, 1] as r1, r2, r3, . . . .</li>
         <li> For each n, consider the decimal expansion of r_n truncated at n digits. That is, let $$ s_n = \text{first n digits of} \hspace{2mm} r_n \hspace{2mm} in \hspace{2mm} [0, 1]. $$
@@ -153,7 +211,7 @@ Each s_n lies in one of the 10^n intervals of the for $$\bigl[\,0.d_1 d_2 \dots 
              a <strong>strictly finite</strong> number of decimal-truncation intervals at each stage—forcing some interval to contain infinitely many “tails.”</li>
         <li> By a diagonal-type selection, you can then construct a real number not in your original list, contradicting countability. This is somewhat more involved than the standard diagonal, 
 but it highlights how <strong>infinitely many pigeons (real numbers) into finitely many “decimal-prefix slots”</strong> forces a new real outside the enumeration.</li>
-      </ol></p>   
+      </ol></p>    -->
   </section>
 
   <section id="cs">
@@ -200,12 +258,19 @@ but it highlights how <strong>infinitely many pigeons (real numbers) into finite
     <p>Any sequence of mn + 1 distinct real numbers contains either an increasing subsequence of length m + 1 or a decreasing subsequence of length n + 1.</p>
       <section id="es">
 <!--     <h2>2. Erdős–Szekeres: Monotonic Subsequence</h2> -->
-    <div class="controls">
-      Sequence length: <input type="number" id="ES-n" value="12" min="5" max="50">
-      <button id="ES-gen">Generate Sequence</button>
-    </div>
-    <canvas id="ES-canvas" width="600" height="200"></canvas>
-    <div id="ES-output"></div>
+<div class="demo-box">
+  <div class="demo-title">📈 Erdős–Szekeres: Longest Increasing Subsequence</div>
+  <div class="explanation">
+    Random sequence of distinct numbers is generated and visualized. The longest increasing subsequence is highlighted in red after simulation.
+  </div>
+  <div class="controls">
+    Sequence length: <input type="number" id="ES-n" value="12" min="5" max="50">
+    <button id="ES-gen">Generate Sequence</button>
+  </div>
+  <canvas id="ES-canvas" width="600" height="200"></canvas>
+  <div id="ES-output"></div>
+</div>
+
   </section>
     <p><strong>Proof Sketch (pigeonhole coloration).</strong> $$ \text{1. Let the sequence be} \hspace{2mm} a_1, a_2, . . . , a_{m.n} +1.$$</p>
     <p>2. For each position i, define two numbers: <br>
