@@ -175,13 +175,26 @@
     <p>For any real α and any integer N ≥ 1. there exist integers p and q with 1≤ q ≤ N    $$\bigl|\alpha - \tfrac{p}{q}\bigr| < \tfrac1{qN}. $$ </p>
       <section id="dirichlet">
 <!--     <h2>1. Dirichlet Algorithm</h2> -->
-    <div class="controls">
-      #points: <input type="number" id="D-n" value="20" min="2" max="200">
-      #bins:   <input type="number" id="D-k" value="5" min="2" max="20">
-      <button id="D-run">Place Points</button>
-    </div>
-    <canvas id="D-canvas" width="600" height="100"></canvas>
-    <div id="D-output"></div>
+<div class="demo-box" id="dirichlet-demo">
+  <div class="demo-title">🎯 Dirichlet’s Approximation — Overflow in Bins</div>
+  
+  <div class="explanation">
+    Pick <b>n real numbers</b> randomly from [0,1) and divide them into <b>k bins</b>.<br>
+    The <i>Pigeonhole Principle</i> says: <code>⌈n⁄k⌉</code> or more must land in at least one bin. Try it!
+  </div>
+  
+  <div class="controls">
+    Number of points (n): 
+    <input type="number" id="D-n" value="20" min="2" max="200">
+    &nbsp;&nbsp;Number of bins (k): 
+    <input type="number" id="D-k" value="5" min="2" max="20">
+    <button id="D-run">Simulate</button>
+  </div>
+  
+  <canvas id="D-canvas" width="600" height="100"></canvas>
+  <div id="D-output"></div>
+</div>
+
     </section>
 
     <p><strong>Sketch using pigeonholes.</strong></p>
@@ -255,13 +268,13 @@ but it highlights how <strong>infinitely many pigeons (real numbers) into finite
     <h3>4.1 Erd&#337;s–Szekeres: Monotonic Subsequence</h3>
     
     <p><strong>Theorem (Erd&#337;s–Szekeres).</strong></p>
-    <p>Any sequence of mn + 1 distinct real numbers contains either an increasing subsequence of length m + 1 or a decreasing subsequence of length n + 1.</p>
+    <p>Any sequence of m.n + 1 distinct real numbers contains either an increasing subsequence of length <strong>m + 1</strong> or a decreasing subsequence of length <strong>n + 1.</strong></p>
       <section id="es">
 <!--     <h2>2. Erdős–Szekeres: Monotonic Subsequence</h2> -->
 <div class="demo-box">
   <div class="demo-title">📈 Erdős–Szekeres: Longest Increasing Subsequence</div>
   <div class="explanation">
-    Random sequence of distinct numbers is generated and visualized. The longest increasing subsequence is highlighted in red after simulation.
+    Random sequence of distinct numbers is generated. The longest increasing subsequence is highlighted in red.
   </div>
   <div class="controls">
     Sequence length: <input type="number" id="ES-n" value="12" min="5" max="50">
