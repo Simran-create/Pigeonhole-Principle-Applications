@@ -96,6 +96,46 @@
     margin-bottom: 1rem;
   }
 </style>
+<style>
+  #ramsey-svg .node {
+    fill: #eee;
+    stroke: #666;
+    stroke-width: 2;
+    r: 16;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #ramsey-svg .node:hover {
+    stroke: #333;
+    stroke-width: 3;
+  }
+
+  #ramsey-svg .edge {
+    stroke-width: 4;
+    stroke-linecap: round;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #ramsey-svg .edge:hover {
+    stroke-opacity: 0.7;
+    stroke-width: 5;
+  }
+
+  #ramsey-svg .highlight {
+    stroke: gold !important;
+    stroke-width: 6 !important;
+  }
+
+  #RM-output {
+    margin-top: 1rem;
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: #444;
+  }
+</style>
+
 
 
 
@@ -311,10 +351,16 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
     
     <h3>4.3 Monochromatic Subsets (Ramsey-Flavored)</h3>
         <section id="ramsey">
-<!--     <h2>3. Monochromatic Subsets (Ramsey-Flavored)</h2> -->
-    <p>Click an edge to toggle red/blue. Detect any monochromatic triangle.</p>
-    <svg id="RM-svg" width="400" height="400"></svg>
-    <div id="RM-output"></div>
+<div class="demo-box" id="ramsey-demo">
+  <div class="demo-title">🔺 Ramsey Theory — Monochromatic Triangle Game</div>
+  <div class="explanation">
+    You are coloring edges of a complete graph with <b>6 nodes</b>. Click an edge to toggle its color (blue 🔵 or red 🔴).
+    Can you force or avoid a monochromatic triangle?
+  </div>
+  <svg id="ramsey-svg" width="400" height="400"></svg>
+  <div id="RM-output"></div>
+</div>
+
   </section>
     <p>More generally, if you color the edges of a sufficiently large complete graph K_n in c colors, pigeonhole arguments often help find monochromatic cliques of a given size. 
                        While standard proofs use induction, the base cases rely on simple pigeonhole partitions of edges.</p>
@@ -461,60 +507,75 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
   })();
 
   // --- 3. Monochromatic Subsets (Ramsey) ---
-  (function(){
-    const svg = document.getElementById('RM-svg');
-    const N=6, R=150, cx=200, cy=200;
-    const nodes = [], edges = {};
-    // create nodes
-    for(let i=0;i<N;i++){
-      const theta = 2*Math.PI*i/N;
-      const x = cx + R*Math.cos(theta);
-      const y = cy + R*Math.sin(theta);
-      const c = document.createElementNS(svg.namespaceURI,'circle');
-      c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',15);
-      c.classList.add('node');
-      svg.appendChild(c);
-      nodes.push({x,y,el:c});
-    }
-    // create edges
-    for(let i=0;i<N;i++) for(let j=i+1;j<N;j++){
-      const key=`${i}-${j}`;
-      const e = document.createElementNS(svg.namespaceURI,'line');
-      e.setAttribute('x1', nodes[i].x);
-      e.setAttribute('y1', nodes[i].y);
-      e.setAttribute('x2', nodes[j].x);
-      e.setAttribute('y2', nodes[j].y);
-      e.classList.add('edge');
-      e.dataset.color = 'blue';
-      e.style.stroke = 'blue';
-      svg.appendChild(e);
-      edges[key]=e;
-      e.onclick = () => {
-        e.dataset.color = e.dataset.color==='blue'?'red':'blue';
-        e.style.stroke = e.dataset.color;
-        detectClique();
+(function() {
+  const svg = document.getElementById('ramsey-svg');
+  const N = 6, R = 150, cx = 200, cy = 200;
+  const nodes = [], edges = {};
+
+  // Create 6 nodes in a hexagon layout
+  for (let i = 0; i < N; i++) {
+    const theta = 2 * Math.PI * i / N;
+    const x = cx + R * Math.cos(theta);
+    const y = cy + R * Math.sin(theta);
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", 16);
+    circle.classList.add("node");
+    svg.appendChild(circle);
+    nodes.push({ x, y, el: circle });
+  }
+
+  // Create edges with toggleable colors
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      const key = `${i}-${j}`;
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", nodes[i].x);
+      line.setAttribute("y1", nodes[i].y);
+      line.setAttribute("x2", nodes[j].x);
+      line.setAttribute("y2", nodes[j].y);
+      line.classList.add("edge");
+      line.dataset.color = "blue";
+      line.style.stroke = "blue";
+      svg.appendChild(line);
+      edges[key] = line;
+
+      line.onclick = () => {
+        // toggle red ↔ blue
+        const newColor = line.dataset.color === "blue" ? "red" : "blue";
+        line.dataset.color = newColor;
+        line.style.stroke = newColor;
+        detectTriangle();
       };
     }
-    function detectClique(){
-      // check all triples
-      const col = edges;
-      for(let a=0;a<N;a++) for(let b=a+1;b<N;b++) for(let c=b+1;c<N;c++){
-        const e1=col[`${a}-${b}`]||col[`${b}-${a}`];
-        const e2=col[`${a}-${c}`]||col[`${c}-${a}`];
-        const e3=col[`${b}-${c}`]||col[`${c}-${b}`];
-        if(e1.dataset.color===e2.dataset.color && e2.dataset.color===e3.dataset.color){
-          // highlight
-          [e1,e2,e3].forEach(e=> e.classList.add('highlight'));
-          document.getElementById('RM-output').textContent =
-            `Found a ${e1.dataset.color} triangle among nodes ${a+1},${b+1},${c+1}!`;
-          return;
+  }
+
+  function detectTriangle() {
+    const out = document.getElementById("RM-output");
+    out.innerHTML = '';
+    // Remove all highlights
+    Object.values(edges).forEach(e => e.classList.remove("highlight"));
+
+    // Brute force all triplets (20)
+    for (let a = 0; a < N; a++) {
+      for (let b = a + 1; b < N; b++) {
+        for (let c = b + 1; c < N; c++) {
+          const e1 = edges[`${a}-${b}`] || edges[`${b}-${a}`];
+          const e2 = edges[`${a}-${c}`] || edges[`${c}-${a}`];
+          const e3 = edges[`${b}-${c}`] || edges[`${c}-${b}`];
+          const color = e1.dataset.color;
+          if (e2.dataset.color === color && e3.dataset.color === color) {
+            [e1, e2, e3].forEach(e => e.classList.add("highlight"));
+            out.innerHTML = `⚠️ ${color.toUpperCase()} triangle found among nodes ${a+1}, ${b+1}, ${c+1}`;
+            return;
+          }
         }
       }
-      // clear highlights
-      Object.values(edges).forEach(e=>e.classList.remove('highlight'));
-      document.getElementById('RM-output').textContent = '';
     }
-  })();
+  }
+})();
+
 
   // --- 4. Art of Finding Right Pigeonholes ---
   (function(){
