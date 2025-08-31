@@ -241,7 +241,7 @@
   <section id="intro">
     <h2>Introduction</h2>
     <p><em>“You cannot put 10 socks in 9 drawers without something overlapping, obvious right? But this trivial fact lets you prove infinite truths, detect collisions in cryptography, and defeat compression algorithms.”</em></p>
-    <p>The Pigeonhole Principle (PHP)—“if you have more pigeons than holes, at least one hole must contain at least two pigeons”—feels like a Kindergarten observation. Now imagine using that idea to prove:</p>
+    <p>The Pigeonhole Principle (PHP), “if you have more pigeons than holes, at least one hole must contain at least two pigeons” feels like a Kindergarten observation. Now imagine using that idea to prove:</p>
     <ul>
       <li>✖️ Some functions must <strong>fail to be injective,</strong></li>
       <li>🗜️ Some data files <strong>can’t be compressed,</strong></li>
@@ -345,7 +345,7 @@ but it highlights how <strong>infinitely many pigeons (real numbers) into finite
     <h3>3.1 Hashing and Collisions</h3>
     <p>$$ \text{Setup:} \hspace{2mm} \text{A hash function h} : \hspace{2mm} \{0, 1\}^n → \{0, 1\}^m \hspace{2mm} \text{maps n-bit inputs to m-bit outputs, where m < n.}  $$ </p>
     <p> <strong>Pigeonhole argument.</strong> There are 2^n possible inputs (“pigeons”) but only 2^m hash-values (“holes”). 
-          If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs—i.e., a collision.</p>
+          If 2^n > 2^m, then by PHP, some hash-value must be attained by at least two distinct inputs i.e. a collision.</p>
     <p><strong>Implication.</strong> No hash function can be injective once n > m. In practice, cryptographic hashes are designed to make collisions hard to find even if they must exist.</p>
     <p><strong>Diagram:</strong> Inputs vs Hash Buckets $$ \text{Inputs (} \hspace{1mm} 2^n \hspace{2mm} \text{pigeons):} \hspace{1mm}  x_1, \hspace{1mm} x_2, \hspace{1mm} x_3, \hspace{1mm} ..., \hspace{1mm} x_{2^n} $$ </p> 
                   <p> $$ \text{Hash Buckets} \hspace{2mm} (2^m \hspace{2mm} \text{holes}):\hspace{2mm} [ \hspace{1mm} 0 \hspace{1mm} ] \hspace{2mm} [\hspace{1mm} 1 \hspace{1mm} ] \hspace{2mm} ... \hspace{2mm} [ \hspace{1mm} 2^m − 1 \hspace{1mm}] $$</p>
@@ -368,7 +368,7 @@ but it highlights how <strong>infinitely many pigeons (real numbers) into finite
     <p><strong>Implication.</strong> To resist birthday attacks, choose m large (e.g., m = 256 for SHA-256). Then 2^128 effort is required to find a collision by brute force, which is currently computationally infeasible.</p>
     <h3>3.4 Load Balancing and Cache Design</h3>
     <p>Suppose you have k servers (or cache slots) and want to assign n tasks (or memory blocks) dynamically:</p>
-    <p>If n > k and tasks are all “hot,” by simple pigeonhole, at least one server must handle at least ⌈ n/k ⌉ tasks simultaneously—creating a bottleneck.</p>
+    <p>If n > k and tasks are all “hot,” by simple pigeonhole, at least one server must handle at least ⌈ n/k ⌉ tasks simultaneously creating a bottleneck.</p>
     <p><strong>Cache lines.</strong> Consider a CPU cache with B cache lines and N distinct memory blocks. If a program accesses N blocks where <br> N > B 
  while reusing them in some pattern, eventually some cache line must evict another (due to PHP). This underlies cache-miss lower bounds in algorithms.</p>
     <p><strong>Balanced hashing (Cuckoo, Consistent Hashing).</strong> These techniques try to distribute “pigeons” (requests) evenly among “holes” (servers), but ultimately if you have more requests than servers, some server must bear extra load.</p> 
@@ -492,21 +492,21 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
 
   <section id="closing">
     <h2>Closing</h2>
-    <p>From “you can’t put 10 socks in 9 drawers” to “no universal compressor can shrink every file,” the Pigeonhole Principle reveals astonishing power. By carefully choosing “holes”—intervals, residue classes, colors, or substructures—one transforms a <strong>finite counting argument</strong> into far-reaching conclusions.
+    <p>From “you can’t put 10 socks in 9 drawers” to “no universal compressor can shrink every file,” the Pigeonhole Principle reveals astonishing power. By carefully choosing “holes”-intervals, residue classes, colors, or substructures- one transforms a <strong>finite counting argument</strong> into far-reaching conclusions.
     <li><strong>Infinite conclusions:</strong> Dirichlet’s approximation, uncountability, and existence of infinite subsets</li>
     <li><strong>Cryptographic bounds: </strong>collisions in hashing, birthday attacks in SHA, and security parameters.</li>
     <li><strong>Combinatorial certainties:</strong> monotonic subsequences, Ramsey-style triangles, and anticliques in posets</li>
     <li><strong>Impossibility theorems:</strong> compression paradox, injective limitations, and cache lower bounds</li>
     </p>
-    <p>Every time you feel stuck—when a problem hints at “too many items to fit in too few categories”—reach for the Pigeonhole Principle.</p>
-    <p><strong>Call to Action. </strong>Next time you see “more objects than categories,” pause. Can you define the categories (pigeonholes) so that PHP gives you exactly the statement you need? Look around—every limitation hides a powerful truth waiting to be unearthed.</p>
+    <p>Every time you feel stuck when a problem hints at “too many items to fit in too few categories” reach for the Pigeonhole Principle.</p>
+    <p><strong>Call to Action. </strong>Next time you see “more objects than categories,” pause. Can you define the categories (pigeonholes) so that PHP gives you exactly the statement you need? Look around every limitation hides a powerful truth waiting to be unearthed.</p>
     <h3>6.1 Further Exploration</h3>
     <p>If you want to dive deeper, consider these <strong>self-contained</strong> exercises:</p>
     <p><strong>1. Dirichlet’s Bound on π.</strong> Show that there are infinitely many rational approximations p/q to π satisfying $$\left|\pi - \tfrac{p}{q}\right| < \tfrac{1}{q^2},$$ using a pigeonhole partition of {kπ} into intervals of length 1/N.</p>
     <p><strong>2. Ramsey Number R(4, 4).</strong> By extending the “star-center” pigeonhole idea, prove that any 2-coloring of K_18 contains a monochromatic K4. 
       (Hint: Partition edges incident to a vertex into two colors; then apply the R(3, 3) = 6 result on neighbors.)</p>
 
-    <p><strong>3. Generalized PHP in Metric Spaces.</strong> Given infinitely many points in [0, 1]^2, partition the square into a n×n grid of little squares. Show one small square contains infinitely many points—yielding a cluster point for Bolzano–Weierstrass.</p>
+    <p><strong>3. Generalized PHP in Metric Spaces.</strong> Given infinitely many points in [0, 1]^2, partition the square into a n×n grid of little squares. Show one small square contains infinitely many points yielding a cluster point for Bolzano–Weierstrass.</p>
     <blockquote>Each of these tasks reinforces the key insight: finite partitions force infinite structure.</blockquote>
     <p><strong>Remember:</strong> The simplest idea: “if more pigeons than holes, two share a hole” - is often the key to both elementary and deep mathematical and computational truths. Happy pigeonholing!</p>
 
@@ -745,3 +745,4 @@ we are done (we found our long monotonic subsequence). Otherwise, each i corresp
   </footer>
 </body>
 </html>
+
